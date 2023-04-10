@@ -1,5 +1,5 @@
 ---
-title: Veri Analizine Giriş
+title: Tanışma ve Giriş
 subtitle: MEF MGMT 553 (Bahar 2022-2023)
 author: Berk Orbay
 format: 

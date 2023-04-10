@@ -5,7 +5,7 @@ toc: false
 
 # Ders 1 (12 Nisan 2023)
 
-+ Giriş
++ [Giriş](./intro.html)
 + Ödev 1: Tanışma (Blackboard)
 + Uygulama: [Startup Deals 2021](https://github.com/berkorbay/datasets/raw/master/startup_deals/startup_deals_2021.xlsx)
 
