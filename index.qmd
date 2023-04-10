@@ -1,8 +1,17 @@
 ---
-title: "MEF MGMT 553 Sprint 2022-2023"
+title: "MEF MGMT 553 Bahar 2022-2023"
 toc: false
 ---
 
-# Lecture 1 (April 12, 2023)
+# Ders 1 (12 Nisan 2023)
 
-Coming Soon...
++ Giriş
++ Ödev 1: Tanışma (Blackboard)
++ Uygulama: [Startup Deals 2021](https://github.com/berkorbay/datasets/raw/master/startup_deals/startup_deals_2021.xlsx)
+
+Ek kaynak:
+
++ [MEF BDA 503](https://mef-bda503.github.io/fall22/)
+
+
+This class is supported by [Datacamp for Universities](https://www.datacamp.com/universities#classroom-form). Students will learn from interactive environments in their journeys as data analysts and data scientists.

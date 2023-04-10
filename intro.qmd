@@ -1,0 +1,60 @@
+---
+title: Veri Analizine Giriş
+subtitle: MEF MGMT 553 (Bahar 2022-2023)
+author: Berk Orbay
+format: 
+    revealjs:
+        smaller: true
+---
+
+## Dersin amaçları
+
+Bu dersin üç ana amacı bulunmaktadır.
+
+- Temel veri analiz ve veri bilimi yetkinliklerini aktarmak
+- Veri bilimi ile ilgili ileri düzey çalışmalar konusunda bilgilendirmek
+- Katılımcıların bu derste gördükleri ve öğrendiklerini kendi kurumlarındaki süreçlere entegre edebilmelerini sağlamak
+
+Bu amaçlara ulaşmak doğrultusunda her hafta
+
+- Veri bilimi konusunda teknik bir konu işlenecektir
+- Sektörden misafir hocalar ile farklı sektörlerdeki ileri düzey konular hakkında bilgilendirme sağlanacaktır
+- Ders içi uygulamalar ile öğrenilenler pekiştirilecektir
+
+## Ders programı
+
+1. Tanışma ve veri analitiğine giriş
+2. Veri düzenleme ve görselleştirme
+3. Otomatik Raporlama 
+4. Modelleme (Optimizasyon / Makine Öğrenmesi / Yapay Zeka)
+5. Ürün Geliştirme
+6. Bulut Bilişim
+7. Sunumlar
+
+2. hafta ve 6. hafta arasında dersimize misafir hocaların katılması hedeflenmektedir.
+
+## Derse Katılım ve Değerlendirme
+
+Derse katılım Zoom üzerinden gerçekleştirilecektir.
+
+Değerlendirme için aşağıdaki yöntemler kullanılacaktır.
+
+- Ödevler  
+- Sınıf içi uygulamalar  
+- Derse katılım  
+- Datacamp  
+- Proje  
+
+## Grup Projesi
+
++ Grupların oluşturulması (5-6 kişilik gruplar)  
++ Grup belirleme son tarih: 26 Nisan Çarşamba 23:59  
+    + Grup ismi ve üyelerinin mail yoluyla bildirilmeli  
+    + Son tarihe kadar gruplar oluşturulmadığı takdirde rastgele atama yapılacaktır  
++ Grup proje dökümanının Blackboard'a yüklenmesi  
++ 7. hafta sunumlar  
+
+Grup projeleri sektörel bir problem üzerinde yapılan bir araştırma, bir veri analizi ve çözüm önerilerinden oluşan bir sunum şeklinde yapılacaktır.  
+
+
+
