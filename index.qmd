@@ -8,6 +8,8 @@ toc: false
 + [Giriş](./intro.html)
 + Ödev 1: Tanışma (Blackboard)
 + Uygulama: [Startup Deals 2021](https://github.com/berkorbay/datasets/raw/master/startup_deals/startup_deals_2021.xlsx)
+    + Excel üzerinde bu veriyi inceleyip düzenleyip bir "rapor" hazırlayın
+    + Rapor Powerpoint formatında olsun max 5 sayfa
 
 Ek kaynak:
 

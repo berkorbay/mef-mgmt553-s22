@@ -13,7 +13,7 @@ Bu dersin üç ana amacı bulunmaktadır.
 
 - Temel veri analiz ve veri bilimi yetkinliklerini aktarmak
 - Veri bilimi ile ilgili ileri düzey çalışmalar konusunda bilgilendirmek
-- Katılımcıların bu derste gördükleri ve öğrendiklerini kendi kurumlarındaki süreçlere entegre edebilmelerini sağlamak
+- Katılımcıların bu derste gördükleri ve öğrendiklerini kendi kurumlarındaki süreçlere çevik bir şekilde entegre edebilmelerini sağlamak
 
 Bu amaçlara ulaşmak doğrultusunda her hafta
 
@@ -21,7 +21,11 @@ Bu amaçlara ulaşmak doğrultusunda her hafta
 - Sektörden misafir hocalar ile farklı sektörlerdeki ileri düzey konular hakkında bilgilendirme sağlanacaktır
 - Ders içi uygulamalar ile öğrenilenler pekiştirilecektir
 
+Dersin sonunda öğrencilerin iş hayatlarında veri bilimi projelerini uygulayabilecekleri bir çerçeve yöntemin nosyonunu ve ihtiyaç duydukları gerekli araçları nasıl kullanabileceklerini öğrenmeleri hedeflenmektedir.
+
 ## Ders programı
+
+Haftalık tahmini program aşağıdaki gibidir. Değişiklikler olabilir.
 
 1. Tanışma ve veri analitiğine giriş
 2. Veri düzenleme ve görselleştirme
@@ -39,11 +43,12 @@ Derse katılım Zoom üzerinden gerçekleştirilecektir.
 
 Değerlendirme için aşağıdaki yöntemler kullanılacaktır.
 
-- Ödevler  
-- Sınıf içi uygulamalar  
-- Derse katılım  
-- Datacamp  
-- Proje  
+- Ödevler: Kısa ve öğrenciyi araştırmaya veya katılıma yönlendirecek veri odaklı görevler.  
+- Sınıf içi uygulamalar: Öğrencilerin kendi uzmanlık alanlarıyla, veri bilimi temellerini birleştirebilecekleri kısa süreli görevler.   
+- Derse katılım: Derste veri odaklı tartışmalara katılım ve misafir hocalar ile etkileşim  
+- Datacamp: Ders dışında teknik yetkinlikleri pekiştirme   
+- **Proje** 
+
 
 ## Grup Projesi
 
@@ -57,4 +62,12 @@ Değerlendirme için aşağıdaki yöntemler kullanılacaktır.
 Grup projeleri sektörel bir problem üzerinde yapılan bir araştırma, bir veri analizi ve çözüm önerilerinden oluşan bir sunum şeklinde yapılacaktır.  
 
 
+## Misafir Hocalar
 
+2. hafta ile 6. hafta arasında her hafta bir misafir hoca dersimize katılacak. Tahmini program aşağıdaki gibi gerçekleşecektir. Değişiklikler olabilir.
+ 
++ Burak Yitgin - EPİAŞ Strateji Geliştirme / Sabancı Üniv Enerji Piyasaları 
++ Erdem Sezer -  Kalkınma Yatırım Bankası Sektörel Araştırma
++ Onur Karadeli - SOCAR İleri Analitik
++ Taner Doğuç - QNB Finansbank Hazine Finansal Yapay Zeka Uygulamaları / Özyeğin Üniversitesi Finans Mühendisliği
++ Gizem Gür - Sufle AWS Advanced Tier Partner

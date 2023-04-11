@@ -4,21 +4,21 @@
     "href": "intro.html#dersin-amaçları",
     "title": "Tanışma ve Giriş",
     "section": "Dersin amaçları",
-    "text": "Dersin amaçları\nBu dersin üç ana amacı bulunmaktadır.\n\nTemel veri analiz ve veri bilimi yetkinliklerini aktarmak\nVeri bilimi ile ilgili ileri düzey çalışmalar konusunda bilgilendirmek\nKatılımcıların bu derste gördükleri ve öğrendiklerini kendi kurumlarındaki süreçlere entegre edebilmelerini sağlamak\n\nBu amaçlara ulaşmak doğrultusunda her hafta\n\nVeri bilimi konusunda teknik bir konu işlenecektir\nSektörden misafir hocalar ile farklı sektörlerdeki ileri düzey konular hakkında bilgilendirme sağlanacaktır\nDers içi uygulamalar ile öğrenilenler pekiştirilecektir"
+    "text": "Dersin amaçları\nBu dersin üç ana amacı bulunmaktadır.\n\nTemel veri analiz ve veri bilimi yetkinliklerini aktarmak\nVeri bilimi ile ilgili ileri düzey çalışmalar konusunda bilgilendirmek\nKatılımcıların bu derste gördükleri ve öğrendiklerini kendi kurumlarındaki süreçlere çevik bir şekilde entegre edebilmelerini sağlamak\n\nBu amaçlara ulaşmak doğrultusunda her hafta\n\nVeri bilimi konusunda teknik bir konu işlenecektir\nSektörden misafir hocalar ile farklı sektörlerdeki ileri düzey konular hakkında bilgilendirme sağlanacaktır\nDers içi uygulamalar ile öğrenilenler pekiştirilecektir\n\nDersin sonunda öğrencilerin iş hayatlarında veri bilimi projelerini uygulayabilecekleri bir çerçeve yöntemin nosyonunu ve ihtiyaç duydukları gerekli araçları nasıl kullanabileceklerini öğrenmeleri hedeflenmektedir."
   },
   {
     "objectID": "intro.html#ders-programı",
     "href": "intro.html#ders-programı",
     "title": "Tanışma ve Giriş",
     "section": "Ders programı",
-    "text": "Ders programı\n\nTanışma ve veri analitiğine giriş\nVeri düzenleme ve görselleştirme\nOtomatik Raporlama\nModelleme (Optimizasyon / Makine Öğrenmesi / Yapay Zeka)\nÜrün Geliştirme\nBulut Bilişim\nSunumlar\nhafta ve 6. hafta arasında dersimize misafir hocaların katılması hedeflenmektedir."
+    "text": "Ders programı\nHaftalık tahmini program aşağıdaki gibidir. Değişiklikler olabilir.\n\nTanışma ve veri analitiğine giriş\nVeri düzenleme ve görselleştirme\nOtomatik Raporlama\nModelleme (Optimizasyon / Makine Öğrenmesi / Yapay Zeka)\nÜrün Geliştirme\nBulut Bilişim\nSunumlar\nhafta ve 6. hafta arasında dersimize misafir hocaların katılması hedeflenmektedir."
   },
   {
     "objectID": "intro.html#derse-katılım-ve-değerlendirme",
     "href": "intro.html#derse-katılım-ve-değerlendirme",
     "title": "Tanışma ve Giriş",
     "section": "Derse Katılım ve Değerlendirme",
-    "text": "Derse Katılım ve Değerlendirme\nDerse katılım Zoom üzerinden gerçekleştirilecektir.\nDeğerlendirme için aşağıdaki yöntemler kullanılacaktır.\n\nÖdevler\n\nSınıf içi uygulamalar\n\nDerse katılım\n\nDatacamp\n\nProje"
+    "text": "Derse Katılım ve Değerlendirme\nDerse katılım Zoom üzerinden gerçekleştirilecektir.\nDeğerlendirme için aşağıdaki yöntemler kullanılacaktır.\n\nÖdevler: Kısa ve öğrenciyi araştırmaya veya katılıma yönlendirecek veri odaklı görevler.\n\nSınıf içi uygulamalar: Öğrencilerin kendi uzmanlık alanlarıyla, veri bilimi temellerini birleştirebilecekleri kısa süreli görevler.\n\nDerse katılım: Derste veri odaklı tartışmalara katılım ve misafir hocalar ile etkileşim\n\nDatacamp: Ders dışında teknik yetkinlikleri pekiştirme\n\nProje"
   },
   {
     "objectID": "intro.html#grup-projesi",
@@ -28,10 +28,17 @@
     "text": "Grup Projesi\n\nGrupların oluşturulması (5-6 kişilik gruplar)\n\nGrup belirleme son tarih: 26 Nisan Çarşamba 23:59\n\nGrup ismi ve üyelerinin mail yoluyla bildirilmeli\n\nSon tarihe kadar gruplar oluşturulmadığı takdirde rastgele atama yapılacaktır\n\n\nGrup proje dökümanının Blackboard’a yüklenmesi\n\n\nhafta sunumlar\n\n\nGrup projeleri sektörel bir problem üzerinde yapılan bir araştırma, bir veri analizi ve çözüm önerilerinden oluşan bir sunum şeklinde yapılacaktır."
   },
   {
+    "objectID": "intro.html#misafir-hocalar",
+    "href": "intro.html#misafir-hocalar",
+    "title": "Tanışma ve Giriş",
+    "section": "Misafir Hocalar",
+    "text": "Misafir Hocalar\n\nhafta ile 6. hafta arasında her hafta bir misafir hoca dersimize katılacak. Tahmini program aşağıdaki gibi gerçekleşecektir. Değişiklikler olabilir.\n\n\nBurak Yitgin - EPİAŞ Strateji Geliştirme / Sabancı Üniv Enerji Piyasaları\nErdem Sezer - Kalkınma Yatırım Bankası Sektörel Araştırma\nOnur Karadeli - SOCAR İleri Analitik\nTaner Doğuç - QNB Finansbank Hazine Finansal Yapay Zeka Uygulamaları / Özyeğin Üniversitesi Finans Mühendisliği\nGizem Gür - Sufle AWS Advanced Tier Partner"
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "MEF MGMT 553 Bahar 2022-2023",
     "section": "",
-    "text": "Ders 1 (12 Nisan 2023)\n\nGiriş\nÖdev 1: Tanışma (Blackboard)\nUygulama: Startup Deals 2021\n\nEk kaynak:\n\nMEF BDA 503\n\nThis class is supported by Datacamp for Universities. Students will learn from interactive environments in their journeys as data analysts and data scientists."
+    "text": "Ders 1 (12 Nisan 2023)\n\nGiriş\nÖdev 1: Tanışma (Blackboard)\nUygulama: Startup Deals 2021\n\nExcel üzerinde bu veriyi inceleyip düzenleyip bir “rapor” hazırlayın\nRapor Powerpoint formatında olsun max 5 sayfa\n\n\nEk kaynak:\n\nMEF BDA 503\n\nThis class is supported by Datacamp for Universities. Students will learn from interactive environments in their journeys as data analysts and data scientists."
   }
 ]
