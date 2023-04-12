@@ -18,21 +18,28 @@
     "href": "intro.html#derse-katılım-ve-değerlendirme",
     "title": "Tanışma ve Giriş",
     "section": "Derse Katılım ve Değerlendirme",
-    "text": "Derse Katılım ve Değerlendirme\nDerse katılım Zoom üzerinden gerçekleştirilecektir.\nDeğerlendirme için aşağıdaki yöntemler kullanılacaktır.\n\nÖdevler: Kısa ve öğrenciyi araştırmaya veya katılıma yönlendirecek veri odaklı görevler.\n\nSınıf içi uygulamalar: Öğrencilerin kendi uzmanlık alanlarıyla, veri bilimi temellerini birleştirebilecekleri kısa süreli görevler.\n\nDerse katılım: Derste veri odaklı tartışmalara katılım ve misafir hocalar ile etkileşim\n\nDatacamp: Ders dışında teknik yetkinlikleri pekiştirme\n\nProje"
+    "text": "Derse Katılım ve Değerlendirme\nDerse katılım Zoom üzerinden gerçekleştirilecektir.\nDeğerlendirme için aşağıdaki yöntemler kullanılacaktır.\n\nÖdevler: Kısa ve öğrenciyi araştırmaya veya katılıma yönlendirecek veri odaklı görevler.\n\nVeri anketi (%10)\nDatacamp (Introduction to Tidyverse) (%20)\nYöneylem Araştırması Ödevi (%10)\n\nSınıf içi uygulamalar: Öğrencilerin kendi uzmanlık alanlarıyla, veri bilimi temellerini birleştirebilecekleri kısa süreli görevler. (%10)\nDerse katılım: Derste veri odaklı tartışmalara katılım ve misafir hocalar ile etkileşim (%10)\nDatacamp: Ders dışında teknik yetkinlikleri pekiştirme\n\nProje (%50)\n\nToplam 110 puan + Bonuslar"
   },
   {
     "objectID": "intro.html#grup-projesi",
     "href": "intro.html#grup-projesi",
     "title": "Tanışma ve Giriş",
     "section": "Grup Projesi",
-    "text": "Grup Projesi\n\nGrupların oluşturulması (5-6 kişilik gruplar)\n\nGrup belirleme son tarih: 26 Nisan Çarşamba 23:59\n\nGrup ismi ve üyelerinin mail yoluyla bildirilmeli\n\nSon tarihe kadar gruplar oluşturulmadığı takdirde rastgele atama yapılacaktır\n\n\nGrup proje dökümanının Blackboard’a yüklenmesi\n\n\nhafta sunumlar\n\n\nGrup projeleri sektörel bir problem üzerinde yapılan bir araştırma, bir veri analizi ve çözüm önerilerinden oluşan bir sunum şeklinde yapılacaktır."
+    "text": "Grup Projesi\n\nGrupların oluşturulması (5-6 kişilik gruplar)\n\nGrup belirleme son tarih: 26 Nisan Çarşamba 23:59\n\nGrup ismi ve üyelerinin mail yoluyla bildirilmeli\n\nSon tarihe kadar gruplar oluşturulmadığı takdirde rastgele atama yapılacaktır\n\n\nGrup proje dökümanının Blackboard’a yüklenmesi\n\n\nhafta sunumlar\n\n\nGrup projeleri sektörel bir problem üzerinde yapılan bir araştırma, bir veri analizi ve çözüm önerilerinden oluşan bir sunum şeklinde yapılacaktır. Detaylar 2. hafta açıklanacaktır.\n## Etik\nVerimli ve adil bir ders deneyimi için çok basit kurallarımız bulunuyor.\n\nLütfen sınıf arkadaşlarınız ile beraber çalışın.\nLütfen internet ve diğer kaynakları çözüm bulmak için kullanın. Arada bir bu dersteki ödevler ve projeler hakkında çözümler bulma ihtimaliniz var ancak öğrenmek veya basitçe kopyala yapıştır yapmak size kalmış.\nLütfen sadece kopyala yapıştır yapmayın ve her zaman faydalandığınız kaynakları belirtin. Örneğin, “Bu linkteki görselleştirme tekniğini çok beğendim ve projemde uyguladım” her zaman için kabul edilebilir ve hatta istenen bir şeydir.\n\nAncak “Kaggle’da birinin yaptığı analizi boylu boyunca kopyalayıp yapıştırdım ve ödev olarak teslim ettim” demek kabul edilemez. Doğrudan F alma sebebidir.\n\nLütfen arkadaşlarınız ile bire bir aynı ödevi teslim etmeyin. Birbirinizin çalışmasından faydalanıyor olsanız dahi; aynı kodu ve aynı analizi, aynı cümleler ile vermeyin."
   },
   {
     "objectID": "intro.html#misafir-hocalar",
     "href": "intro.html#misafir-hocalar",
     "title": "Tanışma ve Giriş",
     "section": "Misafir Hocalar",
-    "text": "Misafir Hocalar\n\nhafta ile 6. hafta arasında her hafta bir misafir hoca dersimize katılacak. Tahmini program aşağıdaki gibi gerçekleşecektir. Değişiklikler olabilir.\n\n\nBurak Yitgin - EPİAŞ Strateji Geliştirme / Sabancı Üniv Enerji Piyasaları\nErdem Sezer - Kalkınma Yatırım Bankası Sektörel Araştırma\nOnur Karadeli - SOCAR İleri Analitik\nTaner Doğuç - QNB Finansbank Hazine Finansal Yapay Zeka Uygulamaları / Özyeğin Üniversitesi Finans Mühendisliği\nGizem Gür - Sufle AWS Advanced Tier Partner"
+    "text": "Misafir Hocalar\n\nhafta ile 6. hafta arasında her hafta bir misafir hoca dersimize katılacak. Tahmini program aşağıdaki gibi gerçekleşecektir. Değişiklikler olabilir.\n\n\nBurak Yitgin - EPİAŞ Strateji Geliştirme / Sabancı Üniv Enerji Piyasaları\nErdem Sezer - Kalkınma Yatırım Bankası Sektörel Araştırma\nOnur Karadeli - SOCAR İleri Analitik\n(Yakında)\nGizem Gür - Sufle AWS Advanced Tier Partner\n\n## Veride el kirletme\n\nGerekli olabilecek programlar\nBook of EDA\nPosit Cloud\nGoogle Colab"
+  },
+  {
+    "objectID": "intro.html#faydalı-kaynaklar",
+    "href": "intro.html#faydalı-kaynaklar",
+    "title": "Tanışma ve Giriş",
+    "section": "Faydalı Kaynaklar",
+    "text": "Faydalı Kaynaklar\n\nMEF BDA 503\n\nOR Primer\n\nIntroduction to Statistical Learning\n\nDatacamp\nHugging Face"
   },
   {
     "objectID": "index.html",

@@ -43,11 +43,16 @@ Derse katılım Zoom üzerinden gerçekleştirilecektir.
 
 Değerlendirme için aşağıdaki yöntemler kullanılacaktır.
 
-- Ödevler: Kısa ve öğrenciyi araştırmaya veya katılıma yönlendirecek veri odaklı görevler.  
-- Sınıf içi uygulamalar: Öğrencilerin kendi uzmanlık alanlarıyla, veri bilimi temellerini birleştirebilecekleri kısa süreli görevler.   
-- Derse katılım: Derste veri odaklı tartışmalara katılım ve misafir hocalar ile etkileşim  
+- Ödevler: Kısa ve öğrenciyi araştırmaya veya katılıma yönlendirecek veri odaklı görevler.
+    - Veri anketi (%10)
+    - Datacamp (Introduction to Tidyverse) (%20)
+    - Yöneylem Araştırması Ödevi (%10)
+- Sınıf içi uygulamalar: Öğrencilerin kendi uzmanlık alanlarıyla, veri bilimi temellerini birleştirebilecekleri kısa süreli görevler. (%10)
+- Derse katılım: Derste veri odaklı tartışmalara katılım ve misafir hocalar ile etkileşim (%10)
 - Datacamp: Ders dışında teknik yetkinlikleri pekiştirme   
-- **Proje** 
+- **Proje** (%50)
+
+Toplam 110 puan + Bonuslar
 
 
 ## Grup Projesi
@@ -59,15 +64,42 @@ Değerlendirme için aşağıdaki yöntemler kullanılacaktır.
 + Grup proje dökümanının Blackboard'a yüklenmesi  
 + 7. hafta sunumlar  
 
-Grup projeleri sektörel bir problem üzerinde yapılan bir araştırma, bir veri analizi ve çözüm önerilerinden oluşan bir sunum şeklinde yapılacaktır.  
+Grup projeleri sektörel bir problem üzerinde yapılan bir araştırma, bir veri analizi ve çözüm önerilerinden oluşan bir sunum şeklinde yapılacaktır. Detaylar 2. hafta açıklanacaktır.
 
+## Etik
+
+Verimli ve adil bir ders deneyimi için çok basit kurallarımız bulunuyor.
+
+1. Lütfen sınıf arkadaşlarınız ile **beraber çalışın.**
+2. Lütfen internet ve diğer kaynakları çözüm bulmak için kullanın. Arada bir bu dersteki ödevler ve projeler hakkında çözümler bulma ihtimaliniz var ancak öğrenmek veya basitçe kopyala yapıştır yapmak size kalmış.
+3. Lütfen **sadece kopyala yapıştır yapmayın** ve her zaman **faydalandığınız kaynakları belirtin**. Örneğin, "Bu linkteki görselleştirme tekniğini çok beğendim ve projemde uyguladım" her zaman için kabul edilebilir ve hatta istenen bir şeydir. 
+
+Ancak "Kaggle'da birinin yaptığı analizi boylu boyunca kopyalayıp yapıştırdım ve ödev olarak teslim ettim" demek kabul edilemez. Doğrudan F alma sebebidir.
+
+4. Lütfen arkadaşlarınız ile **bire bir aynı ödevi teslim etmeyin**. Birbirinizin çalışmasından faydalanıyor olsanız dahi; aynı kodu ve aynı analizi, aynı cümleler ile vermeyin.
 
 ## Misafir Hocalar
 
 2. hafta ile 6. hafta arasında her hafta bir misafir hoca dersimize katılacak. Tahmini program aşağıdaki gibi gerçekleşecektir. Değişiklikler olabilir.
  
-+ Burak Yitgin - EPİAŞ Strateji Geliştirme / Sabancı Üniv Enerji Piyasaları 
-+ Erdem Sezer -  Kalkınma Yatırım Bankası Sektörel Araştırma
-+ Onur Karadeli - SOCAR İleri Analitik
-+ Taner Doğuç - QNB Finansbank Hazine Finansal Yapay Zeka Uygulamaları / Özyeğin Üniversitesi Finans Mühendisliği
-+ Gizem Gür - Sufle AWS Advanced Tier Partner
++ [Burak Yitgin](https://www.linkedin.com/in/burakyitgin/) - EPİAŞ Strateji Geliştirme / Sabancı Üniv Enerji Piyasaları 
++ [Erdem Sezer](https://www.linkedin.com/in/sezererdem/) -  Kalkınma Yatırım Bankası Sektörel Araştırma
++ [Onur Karadeli](https://www.linkedin.com/in/onur-karadeli-phd-c-a46a59112/) - SOCAR İleri Analitik
++ (Yakında)
++ [Gizem Gür](https://www.linkedin.com/in/gizemgur/) - Sufle AWS Advanced Tier Partner
+
+
+## Veride el kirletme
+
++ [Gerekli olabilecek programlar](https://mef-bda503.github.io/fall22/intro.html#/which-tools-are-we-going-to-use-programs)
++ [Book of EDA](https://berkorbay.github.io/book-of-eda/)
++ [Posit Cloud](https://posit.cloud/)
++ [Google Colab](https://colab.research.google.com/)
+
+## Faydalı Kaynaklar
+
++ [MEF BDA 503](https://mef-bda503.github.io/fall22/)  
++ [OR Primer](https://or-primer.github.io/)  
++ [Introduction to Statistical Learning](https://statlearning.com/)  
++ [Datacamp](https://datacamp.com)
++ [Hugging Face](https://huggingface.co/)
