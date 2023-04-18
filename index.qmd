@@ -3,6 +3,13 @@ title: "MEF MGMT 553 Bahar 2022-2023"
 toc: false
 ---
 
+# Ders 2 (12 Nisan 2023)
+
++ Konu: Veri Düzenleme ve Görselleştirme
+    + dplyr: https://www.youtube.com/watch?v=bzrP5bOIyYI 
+    + ggplot2: https://www.youtube.com/watch?v=QB8OXAzL8QE 
++ Misafir hoca: [Burak Yitgin](https://www.linkedin.com/in/burakyitgin/) EPİAŞ Strateji Geliştirme Kıdemli Uzmanı ve Akademisyen (Sabancı Üniversitesi - Enerji Teknolojileri ve Yönetimi Master Programı)
+
 # Ders 1 (12 Nisan 2023)
 
 + [Giriş](./intro.html)
@@ -14,6 +21,7 @@ toc: false
 Ek kaynak:
 
 + [MEF BDA 503](https://mef-bda503.github.io/fall22/)
++ [Eskişehir R User Group](https://www.youtube.com/@eskisehirrusergroup2103)
 
 
 This class is supported by [Datacamp for Universities](https://www.datacamp.com/universities#classroom-form). Students will learn from interactive environments in their journeys as data analysts and data scientists.
