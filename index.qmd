@@ -3,12 +3,13 @@ title: "MEF MGMT 553 Bahar 2022-2023"
 toc: false
 ---
 
-# Ders 2 (12 Nisan 2023)
+# Ders 2 (19 Nisan 2023)
 
 + Konu: Veri Düzenleme ve Görselleştirme
-    + dplyr: https://www.youtube.com/watch?v=bzrP5bOIyYI 
-    + ggplot2: https://www.youtube.com/watch?v=QB8OXAzL8QE 
-+ Misafir hoca: [Burak Yitgin](https://www.linkedin.com/in/burakyitgin/) EPİAŞ Strateji Geliştirme Kıdemli Uzmanı ve Akademisyen (Sabancı Üniversitesi - Enerji Teknolojileri ve Yönetimi Master Programı)
+    + dplyr: [Kaynak](https://berkorbay.github.io/book-of-eda/dplyr.html) - [Ek kaynak](https://www.youtube.com/watch?v=bzrP5bOIyYI)
+    + ggplot2: [Kaynak](https://berkorbay.github.io/book-of-eda/ggplot2.html) [Ek kaynak](https://www.youtube.com/watch?v=QB8OXAzL8QE)
++ Misafir hoca: [Burak Yitgin](https://www.linkedin.com/in/burakyitgin/) EPİAŞ Strateji Geliştirme Kıdemli Uzmanı ve Akademisyen (Sabancı Üniversitesi - Enerji Teknolojileri ve Yönetimi YL)
++ Serbest Uygulama: [YÖK Yabancı Öğrenci Verisi](https://github.com/berkorbay/datasets/raw/master/foreign_students/foreign_students_by_nationality_2021_2022.xlsx)
 
 # Ders 1 (12 Nisan 2023)
 
