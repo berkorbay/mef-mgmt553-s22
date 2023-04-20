@@ -42,10 +42,52 @@
     "text": "Faydalı Kaynaklar\n\nMEF BDA 503\n\nOR Primer\n\nIntroduction to Statistical Learning\n\nDatacamp\nHugging Face"
   },
   {
+    "objectID": "proje.html",
+    "href": "proje.html",
+    "title": "Grup Projeleri",
+    "section": "",
+    "text": "Bu sayfa grup projelerinin yöntemini, değerlendirme kurallarını ve takvimini içermektedir. En son güncelleme: 20 Nisan 10:00."
+  },
+  {
+    "objectID": "proje.html#proje-konusu",
+    "href": "proje.html#proje-konusu",
+    "title": "Grup Projeleri",
+    "section": "Proje Konusu",
+    "text": "Proje Konusu\n\nHer grubun iki alternatifi bulunmaktadır.\n\nKendi çalışmalarını içeren bir veri projesi yapabilirler.\nTÜİK Data Portal üzerinde sunulan veri setlerinden birini kullanarak bir proje yapabilirler.\n\nAnalizleri yaparken kod kullanmak zorunlu değil (Excel veya başka programlar da serbest) ama kullanmak tavsiye edilir.\nProjenin konusu ne olursa olsun tatmin edici bir şekilde veri analizleri yapılması gerekmektedir. Ancak sunumların ana teması bulguların iletişimidir. Diğer bir deyişle, kullandığınız tekniklerin detaylarından çok çıktılarınıza dikkat ediyoruz. Bir üst yönetim toplantısında çalışmalarınızı ve sonuçlarınızı anlatır gibi düşünebilirsiniz."
+  },
+  {
+    "objectID": "proje.html#sunum-günü-24-mayıs",
+    "href": "proje.html#sunum-günü-24-mayıs",
+    "title": "Grup Projeleri",
+    "section": "Sunum Günü (24 Mayıs)",
+    "text": "Sunum Günü (24 Mayıs)\n\n\nHafta (son ders, 24 Mayıs) sunumlara ayrılmış bulunmaktadır. 2 oturum olacak (4 + 4) ve sunumlar 15:10’da başlayacaktır.\n\nHer grubun 12 dakika sunum + 3 dakika soru cevap olmak üzere 15 dakikalık süresi vardır.\nHer gruptan sadece 1 kişinin sunması yeterlidir ama kişi sayısında sınır bulunmamaktadır."
+  },
+  {
+    "objectID": "proje.html#sunum-provası-18-mayıs",
+    "href": "proje.html#sunum-provası-18-mayıs",
+    "title": "Grup Projeleri",
+    "section": "Sunum provası (18 Mayıs)",
+    "text": "Sunum provası (18 Mayıs)\nSunum gününden önceki perşembeye (18 Mayıs) kadar sunum provanızı teslim etmeniz gerekmektedir. Sunum provası, sunumunuzu içeren max 12 dakikalık bir video kaydından oluşmalıdır.\nSunumunuzun son hali olmayabilir ancak son hale yakın olması tercih edilir. Sunum provaları eposta ile dosya formatına teslim edilecektir (değişebilir). Her gruptan bir kişinin teslim etmesi yeterlidir."
+  },
+  {
+    "objectID": "proje.html#sunumlar-ve-teslim",
+    "href": "proje.html#sunumlar-ve-teslim",
+    "title": "Grup Projeleri",
+    "section": "Sunumlar ve Teslim",
+    "text": "Sunumlar ve Teslim\n\nHer sunumun başındaki slaytlardan biri 3-5 kısa (1-1,5 cümle) maddeden oluşan “Önemli Çıkarımlar” slaytı olmalı.\nSlayt sayısı her şey dahil (giriş ve teşekkürler de dahil) 20yi aşmamalıdır. 20nin üzerindeki her ek slayt -10 puan. Sunumun sonunda sorulara göre gösterilebilecek veya daha sonra değerlendirilmesi istenen Ekler kısmı slaytları yer alabilir (“Ekler” diye bir ara slayt ile ayırmalısınız).\nSunumlarda kod göstermek zorunda değilsiniz. Hatta minimal seviyede tutulması tavsiye edilir.\nDeğerlendirme veri projesinin işlenmesi kadar, sunum ve iletişim kalitesi ile de yapılacak. Örneğin slaytları anlamsız karmaşık grafikler ve okunamayan veri tablolarıyla doldurmak kötü değerlendirmeye sebep olur. Teknik kabiliyetinizden eminiz ama problem tanımı, metodoloji, sonuçlar ve çıkarımlar her zaman için net olmalı.\nSunumu yapan kişi sunarken kamerasını açmalıdır.\nSunumlar (Powerpoint dosyaları) Blackboard’a yüklenecektir (ilgili yükleme sayfası son hafta aktif olacaktır). Son tarih gene sunum günü olan 24 Mayıs’tır."
+  },
+  {
+    "objectID": "proje.html#değerlendirme",
+    "href": "proje.html#değerlendirme",
+    "title": "Grup Projeleri",
+    "section": "Değerlendirme",
+    "text": "Değerlendirme\nDeğerlendirme 100 puan üzerinden yapılacaktır.\n\nSunum provası: 20 puan\nProje konusu ve veri setinin yeterliliği: 20 puan\nTeknik yetkinlik ve analiz araçları: 15 puan\nSunum görsel kalitesi: 10 puan\nSunum akışı ve analizin iletişimi: 35 puan (süreye uyum dahil)\n\nDeğerlendirmeyi negatif etkileyebilecek teknik faktörler\n\n20nin üzerindeki slayt sayısı (ekler hariç): -10 puan / slayt\n12 dakikanın üzerindeki süre: -10 puan / dakika"
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "MEF MGMT 553 Bahar 2022-2023",
     "section": "",
-    "text": "Ders 2 (19 Nisan 2023)\n\nKonu: Veri Düzenleme ve Görselleştirme\n\ndplyr: Kaynak - Ek kaynak\nggplot2: Kaynak Ek kaynak\n\nMisafir hoca: Burak Yitgin EPİAŞ Strateji Geliştirme Kıdemli Uzmanı ve Akademisyen (Sabancı Üniversitesi - Enerji Teknolojileri ve Yönetimi YL)\nSerbest Uygulama: YÖK Yabancı Öğrenci Verisi\n\nBaşlangıç Kodu\n\n\n\n\nDers 1 (12 Nisan 2023)\n\nGiriş\nÖdev 1: Tanışma (Blackboard)\nUygulama: Startup Deals 2021\n\nExcel üzerinde bu veriyi inceleyip düzenleyip bir “rapor” hazırlayın\nRapor Powerpoint formatında olsun max 5 sayfa\n\n\nEk kaynak:\n\nMEF BDA 503\nEskişehir R User Group\n\nThis class is supported by Datacamp for Universities. Students will learn from interactive environments in their journeys as data analysts and data scientists."
+    "text": "Projeler\n\n\nDers 2 (19 Nisan 2023)\n\nKonu: Veri Düzenleme ve Görselleştirme\n\ndplyr: Kaynak - Ek kaynak\nggplot2: Kaynak - Ek kaynak\n\nMisafir hoca: Burak Yitgin EPİAŞ Strateji Geliştirme Kıdemli Uzmanı ve Akademisyen (Sabancı Üniversitesi - Enerji Teknolojileri ve Yönetimi YL)\nSerbest Uygulama: YÖK Yabancı Öğrenci Verisi\n\nBaşlangıç Kodu\n\n\n\n\nDers 1 (12 Nisan 2023)\n\nGiriş\nÖdev 1: Tanışma (Blackboard)\nUygulama: Startup Deals 2021\n\nExcel üzerinde bu veriyi inceleyip düzenleyip bir “rapor” hazırlayın\nRapor Powerpoint formatında olsun max 5 sayfa\n\n\nEk kaynak:\n\nMEF BDA 503\nEskişehir R User Group\n\nThis class is supported by Datacamp for Universities. Students will learn from interactive environments in their journeys as data analysts and data scientists."
   }
 ]

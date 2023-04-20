@@ -1,0 +1,65 @@
+---
+title: "Grup Projeleri"
+toc: false
+---
+
+Bu sayfa grup projelerinin yöntemini, değerlendirme kurallarını ve takvimini içermektedir. En son güncelleme: 20 Nisan 10:00.
+
+## Proje Konusu
+
++ Her grubun iki alternatifi bulunmaktadır. 
+    + Kendi çalışmalarını içeren bir veri projesi yapabilirler. 
+    + TÜİK [Data Portal](https://data.tuik.gov.tr/) üzerinde sunulan veri setlerinden birini kullanarak bir proje yapabilirler. 
+
++ Analizleri yaparken kod kullanmak zorunlu değil (Excel veya başka programlar da serbest) ama kullanmak tavsiye edilir.
+
++ Projenin konusu ne olursa olsun tatmin edici bir şekilde veri analizleri yapılması gerekmektedir. Ancak sunumların ana teması bulguların iletişimidir. Diğer bir deyişle, kullandığınız tekniklerin detaylarından çok çıktılarınıza dikkat ediyoruz. Bir üst yönetim toplantısında çalışmalarınızı ve sonuçlarınızı anlatır gibi düşünebilirsiniz.
+
+## Sunum Günü (24 Mayıs)
+
++ 7. Hafta (son ders, 24 Mayıs) sunumlara ayrılmış bulunmaktadır. 2 oturum olacak (4 + 4) ve sunumlar 15:10’da başlayacaktır.
+
++ Her grubun 12 dakika sunum + 3 dakika soru cevap olmak üzere 15 dakikalık süresi vardır.
+
++ Her gruptan sadece 1 kişinin sunması yeterlidir ama kişi sayısında sınır bulunmamaktadır.
+
+## Sunum provası (18 Mayıs)
+
+Sunum gününden önceki perşembeye (18 Mayıs) kadar sunum provanızı teslim etmeniz gerekmektedir. Sunum provası, sunumunuzu içeren max 12 dakikalık bir video kaydından oluşmalıdır. 
+
+Sunumunuzun son hali olmayabilir ancak son hale yakın olması tercih edilir. Sunum provaları eposta ile dosya formatına teslim edilecektir (__değişebilir__). Her gruptan bir kişinin teslim etmesi yeterlidir.
+
+## Sunumlar ve Teslim
+
++ Her sunumun başındaki slaytlardan biri 3-5 kısa (1-1,5 cümle) maddeden oluşan “Önemli Çıkarımlar” slaytı olmalı.
+
++ Slayt sayısı her şey dahil (giriş ve teşekkürler de dahil) 20yi aşmamalıdır. 20nin üzerindeki her ek slayt -10 puan. Sunumun sonunda sorulara göre gösterilebilecek veya daha sonra değerlendirilmesi istenen Ekler kısmı slaytları yer alabilir ("Ekler" diye bir ara slayt ile ayırmalısınız).
+
++ Sunumlarda kod göstermek zorunda değilsiniz. Hatta minimal seviyede tutulması tavsiye edilir.
+
++ Değerlendirme veri projesinin işlenmesi kadar, sunum ve iletişim kalitesi ile de yapılacak. Örneğin slaytları anlamsız karmaşık grafikler ve okunamayan veri tablolarıyla doldurmak kötü değerlendirmeye sebep olur. Teknik kabiliyetinizden eminiz ama problem tanımı, metodoloji, sonuçlar ve çıkarımlar her zaman için net olmalı.
+
++ Sunumu yapan kişi sunarken kamerasını açmalıdır.
+
++ Sunumlar (Powerpoint dosyaları) Blackboard’a yüklenecektir (ilgili yükleme sayfası son hafta aktif olacaktır). Son tarih gene sunum günü olan 24 Mayıs'tır.
+
+
+## Değerlendirme 
+
+Değerlendirme 100 puan üzerinden yapılacaktır.
+
++ Sunum provası: 20 puan
++ Proje konusu ve veri setinin yeterliliği: 20 puan
++ Teknik yetkinlik ve analiz araçları: 15 puan
++ Sunum görsel kalitesi: 10 puan
++ Sunum akışı ve analizin iletişimi: 35 puan (süreye uyum dahil)
+
+Değerlendirmeyi negatif etkileyebilecek teknik faktörler
+
++ 20nin üzerindeki slayt sayısı (ekler hariç): -10 puan / slayt
++ 12 dakikanın üzerindeki süre: -10 puan / dakika
+
+
+
+
+
