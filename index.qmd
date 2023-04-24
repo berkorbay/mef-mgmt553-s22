@@ -5,6 +5,17 @@ toc: false
 
 + [Projeler](./proje.html)
 
+# Ders 3 (26 Nisan 2023)
+
++ Konu: Dinamik Raporlama ([Quarto](https://quarto.org/docs/guide/) / RMarkdown)
+    + [Ek Kaynak](https://www.youtube.com/watch?v=yvi5uXQMvu4)
+    + [Türkçe Kaynak](https://medium.com/@mustafacavus/quarto-yeni-nesil-dinamik-r-python-ve-julia-raporlama-arac%C4%B1-3d6705e61c37)
+    + [Türkçe Kaynak 2 - RMarkdown](https://www.datasciencearth.com/r-markdown-ile-dinamik-raporlama/)
++ Misafir hoca: [Erdem Sezer](https://www.linkedin.com/in/sezererdem/) Kalkınma Yatırım Bankası Sektörel Araştırma Kıdemli Başkan Yardımcısı
++ Serbest Uygulama: [YÖK Yabancı Öğrenci Verisi](https://github.com/berkorbay/datasets/raw/master/foreign_students/foreign_students_by_nationality_2021_2022.xlsx) 
+    + [Başlangıç Kodu](https://gist.github.com/berkorbay/f394bf2ea8775cf7b5316aeafd27c482#file-foreign_students_report_starter_code-qmd)
+
+
 # Ders 2 (19 Nisan 2023)
 
 + Konu: Veri Düzenleme ve Görselleştirme
@@ -12,7 +23,7 @@ toc: false
     + ggplot2: [Kaynak](https://berkorbay.github.io/book-of-eda/ggplot2.html) - [Ek kaynak](https://www.youtube.com/watch?v=QB8OXAzL8QE)
 + Misafir hoca: [Burak Yitgin](https://www.linkedin.com/in/burakyitgin/) EPİAŞ Strateji Geliştirme Kıdemli Uzmanı ve Akademisyen (Sabancı Üniversitesi - Enerji Teknolojileri ve Yönetimi YL)
 + Serbest Uygulama: [YÖK Yabancı Öğrenci Verisi](https://github.com/berkorbay/datasets/raw/master/foreign_students/foreign_students_by_nationality_2021_2022.xlsx) 
-    + [Başlangıç Kodu](https://gist.github.com/berkorbay/f394bf2ea8775cf7b5316aeafd27c482)
+    + [Başlangıç Kodu](https://gist.github.com/berkorbay/f394bf2ea8775cf7b5316aeafd27c482#file-foreign_students_starter_code-r)
     
 
 # Ders 1 (12 Nisan 2023)
