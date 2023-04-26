@@ -11,7 +11,9 @@ toc: false
     + [Ek Kaynak](https://www.youtube.com/watch?v=yvi5uXQMvu4)
     + [Türkçe Kaynak](https://medium.com/@mustafacavus/quarto-yeni-nesil-dinamik-r-python-ve-julia-raporlama-arac%C4%B1-3d6705e61c37)
     + [Türkçe Kaynak 2 - RMarkdown](https://www.datasciencearth.com/r-markdown-ile-dinamik-raporlama/)
-+ Misafir hoca: [Erdem Sezer](https://www.linkedin.com/in/sezererdem/) Kalkınma Yatırım Bankası Sektörel Araştırma Kıdemli Başkan Yardımcısı
++ ~~Misafir hoca: [Erdem Sezer](https://www.linkedin.com/in/sezererdem/) Kalkınma Yatırım Bankası Sektörel Araştırma Kıdemli Başkan Yardımcısı~~(iptal)
++ Konu 2: Dashboard oluşturma ([Shiny](https://shiny.rstudio.com/))
+    + [Türkçe Kaynak](https://www.youtube.com/watch?v=uLpmMD_PJEM)
 + Serbest Uygulama: [YÖK Yabancı Öğrenci Verisi](https://github.com/berkorbay/datasets/raw/master/foreign_students/foreign_students_by_nationality_2021_2022.xlsx) 
     + [Başlangıç Kodu](https://gist.github.com/berkorbay/f394bf2ea8775cf7b5316aeafd27c482#file-foreign_students_report_starter_code-qmd)
 
