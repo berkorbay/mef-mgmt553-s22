@@ -7,7 +7,7 @@ toc: false
 
 # Ders 3 (26 Nisan 2023)
 
-+ Konu: Dinamik Raporlama ([Quarto](https://quarto.org/docs/guide/) / RMarkdown)
++ Konu: Dinamik Raporlama ([Quarto](https://quarto.org/docs/guide/) / [RMarkdown](https://rmarkdown.rstudio.com/))
     + [Ek Kaynak](https://www.youtube.com/watch?v=yvi5uXQMvu4)
     + [Türkçe Kaynak](https://medium.com/@mustafacavus/quarto-yeni-nesil-dinamik-r-python-ve-julia-raporlama-arac%C4%B1-3d6705e61c37)
     + [Türkçe Kaynak 2 - RMarkdown](https://www.datasciencearth.com/r-markdown-ile-dinamik-raporlama/)
