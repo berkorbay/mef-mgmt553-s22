@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.336">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Berk Orbay">
+
+<title>MEF MGMT 553 Spring 2022-2023 - Multi Armed Bandits 101</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">MEF MGMT 553 Spring 2022-2023</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html" rel="" target="">
+ <span class="menu-text">Main Page</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./proje.html" rel="" target="">
+ <span class="menu-text">Projeler</span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools ms-auto">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#preface-to-this-document" id="toc-preface-to-this-document" class="nav-link active" data-scroll-target="#preface-to-this-document">Preface to This Document</a></li>
+  <li><a href="#introduction-to-bandits" id="toc-introduction-to-bandits" class="nav-link" data-scroll-target="#introduction-to-bandits">Introduction to Bandits</a></li>
+  <li><a href="#conceptual-deconstruction" id="toc-conceptual-deconstruction" class="nav-link" data-scroll-target="#conceptual-deconstruction">Conceptual Deconstruction</a>
+  <ul class="collapse">
+  <li><a href="#environment" id="toc-environment" class="nav-link" data-scroll-target="#environment">Environment</a></li>
+  <li><a href="#agent" id="toc-agent" class="nav-link" data-scroll-target="#agent">Agent</a></li>
+  <li><a href="#interaction" id="toc-interaction" class="nav-link" data-scroll-target="#interaction">Interaction</a></li>
+  </ul></li>
+  <li><a href="#notation" id="toc-notation" class="nav-link" data-scroll-target="#notation">Notation</a></li>
+  <li><a href="#algorithms---fun-part" id="toc-algorithms---fun-part" class="nav-link" data-scroll-target="#algorithms---fun-part">Algorithms - Fun Part</a>
+  <ul class="collapse">
+  <li><a href="#greedy-and-epsilon-greedy" id="toc-greedy-and-epsilon-greedy" class="nav-link" data-scroll-target="#greedy-and-epsilon-greedy">Greedy and Epsilon Greedy</a>
+  <ul class="collapse">
+  <li><a href="#epsilon-epsilon-approach" id="toc-epsilon-epsilon-approach" class="nav-link" data-scroll-target="#epsilon-epsilon-approach">Epsilon (<span class="math inline">\(\epsilon\)</span>) Approach</a></li>
+  <li><a href="#optimistic-initial-values" id="toc-optimistic-initial-values" class="nav-link" data-scroll-target="#optimistic-initial-values">Optimistic Initial Values</a></li>
+  </ul></li>
+  <li><a href="#upper-confidence-bound-ucb" id="toc-upper-confidence-bound-ucb" class="nav-link" data-scroll-target="#upper-confidence-bound-ucb">Upper Confidence Bound (UCB)</a></li>
+  <li><a href="#gradient-bandits" id="toc-gradient-bandits" class="nav-link" data-scroll-target="#gradient-bandits">Gradient Bandits</a></li>
+  <li><a href="#thompson-sampling" id="toc-thompson-sampling" class="nav-link" data-scroll-target="#thompson-sampling">Thompson Sampling</a>
+  <ul class="collapse">
+  <li><a href="#beta-bernoulli-bandits" id="toc-beta-bernoulli-bandits" class="nav-link" data-scroll-target="#beta-bernoulli-bandits">Beta-Bernoulli Bandits</a></li>
+  <li><a href="#beta-distribution" id="toc-beta-distribution" class="nav-link" data-scroll-target="#beta-distribution">Beta Distribution</a></li>
+  <li><a href="#how-it-works" id="toc-how-it-works" class="nav-link" data-scroll-target="#how-it-works">How it works</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Multi Armed Bandits 101</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Berk Orbay </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">Invalid Date</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="preface-to-this-document" class="level1">
+<h1>Preface to This Document</h1>
+<p>This document can be considered as a proto-lecture notes for bandit algorithms. It is designed to be an introduction to simple k-armed bandits to teach the fundamentals. Content here can be a lecture worth of a 1 to 3 full-day workshop.</p>
+<p>While the code is in Python, the process will be simple enough that procedures here can even be implemented with Excel formulas to a good degree.</p>
+</section>
+<section id="introduction-to-bandits" class="level1">
+<h1>Introduction to Bandits</h1>
+<p>Reinforcement learning can be dubbed as the “iterative and interactive AI”. In the most basic sense, an “agent” interacts with the “environment” with a “policy” and updates their policy with the “feedback” (i.e.&nbsp;reward/penalty) from the environment. Bandits are a small but extremely entertaining part of the domain.</p>
+<p>A bandit is a simple process that returns you a “reward” when triggered (i.e.&nbsp;chosen). The name (one-armed bandit) originates from gambling. A slot machine is also called a one armed bandit because some old slot machines used to have an arm and they suck you dry as you keep being hooked and losing money to the machine. Though, I admit that calling a mathematical abstraction “bandit” has a certain charm to it. The name “<em>k-armed bandit</em>” means that there are <span class="math inline">\(k\)</span> machines with varying reward distributions. The objective is to learn which machine returns the largest rewards with as little cost (i.e.&nbsp;trials) as possible.</p>
+<p>Bandits have real life applications. In many cases, they replace A/B testing with a more efficient methodology. For instance, sending emails to different segments, showing landing pages to different customers, ad campaign optimization as well as other similar applications can be solved with bandits.</p>
+</section>
+<section id="conceptual-deconstruction" class="level1">
+<h1>Conceptual Deconstruction</h1>
+<p>This part has no math in it. Any reinforcement learning experiment requires constructs to function. Main entities are agent and environment and the interaction between agent and environment is another construct to be considered. Other types such as policies, actions and rewards can be defined inside these categories. Perhaps “time” can be considered as a separate entity. It will all make sense in a moment.</p>
+<section id="environment" class="level2">
+<h2 class="anchored" data-anchor-id="environment">Environment</h2>
+<p>In simple k-armed bandit problems, the environment is your arms on the bandit. At each iteration, one of the arms is selected and the arm yields a “reward”. Agents (decision makers) are not supposed to know the logic behind the reward process, otherwise finding the best arm is a trivial task. Though we may need to design bandits in our experiments.</p>
+<p>A very simple arm design is a uniform random variate generator with lowest value <span class="math inline">\(a\)</span> and highest value <span class="math inline">\(b\)</span>. Expected reward (<span class="math inline">\(E[R]\)</span>) from that arm will therefore be <span class="math inline">\(E[R] = (a+b)/2\)</span>. Suppose we are dealing with two arms with parameters <span class="math inline">\((a=2,b=5)\)</span> and <span class="math inline">\((a=2.5,b=4.7)\)</span>. So, expected rewards are <span class="math inline">\(E[R_1] = 3.5\)</span> and <span class="math inline">\(E[R_2] = 3.6\)</span>. Even though Arm 1 have a higher high-end (5 vs 4.7), on average Arm 2 is a better bet (3.6 vs 3.5).</p>
+<p>Bandits more complex than a stationary distribution are out of the core scope of this lecture. They can be mentioned in discussions or some variants can be introduced as extra exercises.</p>
+</section>
+<section id="agent" class="level2">
+<h2 class="anchored" data-anchor-id="agent">Agent</h2>
+<p>Agent is the decision maker. Agents makes their decisions (actions) according to a policy. This policy makes use of starting assumptions and consequences of its actions (i.e.&nbsp;rewards). An action in simple k-armed bandit problems is simply choosing an arm.</p>
+<p>Agents generally keep record of expected reward estimates of arms and update those estimates as they get the result of their actions. Reward estimates are input to policy functions and policies result in decisions (i.e.&nbsp;next actions).</p>
+<p>Initially (i.e.&nbsp;<span class="math inline">\(t=0\)</span>), all expected reward estimates are assumed to be zero. However this assumption may be adjusted (i.e.&nbsp;optimistic greedy policy).</p>
+</section>
+<section id="interaction" class="level2">
+<h2 class="anchored" data-anchor-id="interaction">Interaction</h2>
+<p>In simple k-armed bandit problem, interaction between the agent and the environment is limited to one action per time step. Agent chooses an arm and receives its reward, that’s it. No multiple choices or no extras (e.g.&nbsp;budgets) at the start. Time is described as discrete (i.e.&nbsp;time step). At each time step the agent decides on a single arm.</p>
+</section>
+</section>
+<section id="notation" class="level1">
+<h1>Notation</h1>
+<p>Every mathematical concept has their own (notation) convention and following a convention is useful for compatibility. Though it is hard to keep track of variables and indices. Here we follow the notation of Sutton and Barto’s book (see Summary of Notation also) and Deepmind UCL’s YouTube videos.</p>
+<ul>
+<li><span class="math inline">\(k\)</span>: Number of actions (bandits in <span class="math inline">\(k\)</span>-armed bandits).</li>
+<li><span class="math inline">\(a\)</span>: A specific action (bandit). It is like choosing Bandit No.8.</li>
+<li><span class="math inline">\(A_{t}\)</span>: Chosen action at time step <span class="math inline">\(t\)</span>.</li>
+<li><span class="math inline">\(Q_{t}(a)\)</span>: Expected reward estimate of action <span class="math inline">\(a\)</span> with the available information at time step <span class="math inline">\(t\)</span>.</li>
+<li><span class="math inline">\(q_{*}(a)\)</span>: Actual expected reward of action <span class="math inline">\(a\)</span>. If everything goes well <span class="math inline">\(Q_{t}(a)\)</span> will converge to <span class="math inline">\(q_{*}(a)\)</span> with increasing <span class="math inline">\(t\)</span>.</li>
+<li><span class="math inline">\(N_{t}(a)\)</span>: Number of times the action <span class="math inline">\(a\)</span> is taken up to time step <span class="math inline">\(t\)</span>.</li>
+<li><span class="math inline">\(H_{t}(a)\)</span>: Learned preference for selecting action <span class="math inline">\(a\)</span> at time <span class="math inline">\(t\)</span>. It is used in contextual bandits.</li>
+<li><span class="math inline">\(\pi_{t}(a)\)</span>: Probability of selecting action <span class="math inline">\(a\)</span> at time <span class="math inline">\(t\)</span>.</li>
+<li><span class="math inline">\(\bar{R_{t}}\)</span>: Estimate of expected reward given the set of <span class="math inline">\(\pi_{t}(a), \forall_{a}\)</span>.</li>
+</ul>
+</section>
+<section id="algorithms---fun-part" class="level1">
+<h1>Algorithms - Fun Part</h1>
+<p>There are several “simple” heuristics to start with MAB, also it is an entry point to Reinforcement Learning. It starts simple, but actually it becomes fairly complex and mathematically rigorous very quickly. There will be some precautions to separate intuition from demanding math without compromising from both. Each algorithm starts with one liners to explain the gist of it.</p>
+<section id="greedy-and-epsilon-greedy" class="level2">
+<h2 class="anchored" data-anchor-id="greedy-and-epsilon-greedy">Greedy and Epsilon Greedy</h2>
+<p>Greedy always picks the arm with the highest estimated reward. If we add a small probability (hence <span class="math inline">\(\epsilon\)</span>) to break habit and pick entirely randomly then it is <span class="math inline">\(\epsilon\)</span>-Greedy.</p>
+<p>We can almost always say Greedy will stuck at local optima (i.e.&nbsp;nice way of saying “It could be better.”). Main reason is finding the best arm severely depends on early actions and their rewards. Suppose there are two bandits. First bandit yields either of <span class="math inline">\((-1,7)\)</span> with equal probability and the second bandit yields <span class="math inline">\((1,2)\)</span>. We know that first bandit’s actual expected reward (<span class="math inline">\(q_*(a=1) = -1 *0.5 + 7*0.5 = 3\)</span>) is higher than the second one (<span class="math inline">\(q_*(a=2) = 1 *0.5 + 2*0.5 = 1.5\)</span>). Our reward estimates for the first step is 0 for both bandits (<span class="math inline">\(Q_1(a=1) = 0, Q_1(a=2) = 0\)</span>).</p>
+<p>But, our greedy agent does not know this fact so it begins to explore. Suppose we pick our first action randomly (<span class="math inline">\(A_1 = 1\)</span>) and reward becomes (<span class="math inline">\(R_1 = -1\)</span>). We update our estimates for the next step to (<span class="math inline">\(Q_2(a=1) = -1, Q_2(a=2) = 0\)</span>). So by Greedy logic, our next action is (<span class="math inline">\(A_2 = 2\)</span>), and suppose its outcome is (<span class="math inline">\(R_2 = 1\)</span>). We update our estimates to (<span class="math inline">\(Q_3(a=1) = -1, Q_3(a=2) = 1\)</span>). The preference is again for the second bandit. Suppose this time reward is (<span class="math inline">\(R_3 = 2\)</span>), therefore estimates are updated (<span class="math inline">\(Q_4(a=1) = -1, Q_4(a=2) = (1 + 2)/2 = 1.5\)</span>). Due to an unfortunate outcome in the first step, first bandit will never be selected in this setting again with a greedy approach.</p>
+<section id="epsilon-epsilon-approach" class="level3">
+<h3 class="anchored" data-anchor-id="epsilon-epsilon-approach">Epsilon (<span class="math inline">\(\epsilon\)</span>) Approach</h3>
+<p>Greedy approaches are pure “exploitation”. Good thing about exploitation is, if we are on the right track we can improve quickly. Bad news is we are seldom on the right track but more frequently we are stuck in some place we think we are on the right track. <span class="math inline">\(\epsilon\)</span>-Greedy is a solution to add some “exploration”. When we set <span class="math inline">\(\epsilon\)</span> to a small probability (say, 0.1), we simply encourage the algorithm to try different alternatives and hopefully be more serendipitous. Exploration vs exploitation is an essential topic that should be discussed more.</p>
+<p>Suppose at the end of time step 7, (<span class="math inline">\(Q_8(a=1) = -1, Q_8(a=2) = 1.62\)</span>), epsilon kicks in and <span class="math inline">\(A_8 = 1\)</span>. This time <span class="math inline">\(R_8 = 7\)</span> and estimated rewards are updated to (<span class="math inline">\(Q_9(a=1) = 3, Q_9(a=2) = 1.62\)</span>).</p>
+</section>
+<section id="optimistic-initial-values" class="level3">
+<h3 class="anchored" data-anchor-id="optimistic-initial-values">Optimistic Initial Values</h3>
+<p>We had a simple assumption of <span class="math inline">\(Q_1(a) = 0, \forall_a\)</span>. What if we start with an optimistic value of 10? (<span class="math inline">\(Q_1(a) = 10, \forall_a\)</span>). Then Greedy algorithm will need to explore at the first iterations. It might improve the performance of the algorithm but there are occasion which this method is ineffective.</p>
+</section>
+</section>
+<section id="upper-confidence-bound-ucb" class="level2">
+<h2 class="anchored" data-anchor-id="upper-confidence-bound-ucb">Upper Confidence Bound (UCB)</h2>
+<p>Another approach to remedy shortsightedness of Greedy method is to add a “bonus” of what the outcome might be. UCB formulates this bonus as an upper (confidence) bound given below. <span class="math inline">\(c\)</span> is a parameter to be chosen, while <span class="math inline">\(\ln t\)</span> represents natural logarithm of the current time step <span class="math inline">\(t\)</span> and <span class="math inline">\(N_t(a)\)</span> is the number of times that action <span class="math inline">\(a\)</span> is chosen.</p>
+<p><span class="math display">\[A_t = \underset{a}{\mathrm{argmax}} \left[ Q_t(a) + c \sqrt{\dfrac{\ln t}{N_t(a)}} \right]\]</span> The resulting extra (<span class="math inline">\(c \sqrt{\dfrac{\ln t}{N_t(a)}}\)</span>) is added to agent’s reward estimation for that action (<span class="math inline">\(Q_t(a)\)</span>) to improve the chances of an action to be taken. If (<span class="math inline">\(N_t(a) = 0\)</span>), then the action’s estimated reward goes to infinity therefore makes the action a priority.</p>
+<p>Upper confidence bound encourages exploration but converges to exploitation as the bandit is explored more frequently. The logic behind can be similar to the thought “This bandit is expected to perform X but it might not be explored that much, so let’s make it X + Y, which Y gets smaller as we visit that bandit.”</p>
+</section>
+<section id="gradient-bandits" class="level2">
+<h2 class="anchored" data-anchor-id="gradient-bandits">Gradient Bandits</h2>
+<p>Gradient bandits differ from other algorithms by implementing a preference scheme rather than using reward estimates directly. Denote preference variable with <span class="math inline">\(H_t(a)\)</span>. Then, instead of selecting with the higher preference convert preference values (scores) to probabilities using the formula below.</p>
+<p><span class="math display">\[Pr\{A_t = a\} = \pi_t(a) = \dfrac{e^{H_t(a)}}{\sum_{b=1}^ke^{H_t(b)}}\]</span></p>
+<p>Then at each step, update the preference values (<span class="math inline">\(H(A_t)\)</span>).</p>
+<p><span class="math inline">\(H_{t+1}(A_t) = H_{t}(A_t) + \alpha(R_t-\bar{R_t})(1-\pi_t(A_t))\)</span> if <span class="math inline">\(A_t = a\)</span>, and<br>
+<span class="math inline">\(H_{t+1}(A_t) = H_{t}(A_t) - \alpha(R_t-\bar{R_t})\pi_t(A_t), \forall_{A_t \neq a}\)</span></p>
+<p>where <span class="math inline">\(\alpha\)</span> is the time step, <span class="math inline">\(\bar{R_t}\)</span> is the average reward up to but not including time <span class="math inline">\(t\)</span>, also called “the baseline”.</p>
+</section>
+<section id="thompson-sampling" class="level2">
+<h2 class="anchored" data-anchor-id="thompson-sampling">Thompson Sampling</h2>
+<p>The final fundamental algorithm for MAB comes from Thompson’s work, which is actually from 1930s. While the approach was largely ignored for about 80 years it is now considered as one of the most successful algorithms for MAB work. I refer to the tutorial given in the References while adding some more elaborations.</p>
+<p>Thompson Sampling is considered under “Bayesian Bandits” category but we are not going to get into details of prior/posterior distributions. Just keep in mind that when someone uses Bayes term, it is about extra (given) information that manipulates probabilities.</p>
+<section id="beta-bernoulli-bandits" class="level3">
+<h3 class="anchored" data-anchor-id="beta-bernoulli-bandits">Beta-Bernoulli Bandits</h3>
+<p>For the sake of simplicity we will constrain ourselves to the “Beta-Bernoulli Bandit” Example. A Bernoulli Bandit means that an event happens with probability <span class="math inline">\(p\)</span> and does not happen with probability <span class="math inline">\(q = 1-p\)</span>, just like a coin toss (for the coin toss <span class="math inline">\(p=q=0.5)\)</span>. So, our Bernoulli bandits give us a reward (say, “success”) with a probability <span class="math inline">\(p_k\)</span> for the <span class="math inline">\(k\)</span>-th bandit and nothing (“fail”) with <span class="math inline">\(q_k\)</span>. The average (mean value) of the reward is simply <span class="math inline">\(E[A_k] = \theta_k = p_k\)</span> and our estimate for <span class="math inline">\(\theta_k\)</span> is simply denoted as <span class="math inline">\(\hat{\theta_k}\)</span>.</p>
+</section>
+<section id="beta-distribution" class="level3">
+<h3 class="anchored" data-anchor-id="beta-distribution">Beta Distribution</h3>
+<p>Here is the part that gets slightly complicated. Our assumptions about <span class="math inline">\(\theta_k\)</span> is based on Beta distribution. Beta distribution is controlled by two shape parameters (<span class="math inline">\(\alpha\)</span>,<span class="math inline">\(\beta\)</span>). Quantile values of the Beta distribution are always between 0 and 1.</p>
+<p>Probability density function seems a bit ominous for the uninitiated but it is fine. Gamma function converts to factorial for positive integer values (<span class="math inline">\(\Gamma(x) = (x-1)!\)</span>) and we will be working on positive integer values for this example. In additon many programming languages have built-in functions to handle Beta distribution related operations.</p>
+<p><span class="math display">\[P(\theta_k;\alpha_k,\beta_k) =\dfrac{\Gamma(\alpha_k + \beta_k)}{\Gamma(\alpha_k)\Gamma(\beta_k)}\theta_k^{\alpha_k-1}(1-\theta_k)^{\beta_k-1}\]</span></p>
+</section>
+<section id="how-it-works" class="level3">
+<h3 class="anchored" data-anchor-id="how-it-works">How it works</h3>
+<p>Let’s put it in some context. Suppose we are showing an ad on a webpage. Each visitor arrives and sees the ad (“view”) and there is a chance to click (“click”) on that ad. We measure success with clicks (<span class="math inline">\(\alpha\)</span> parameter) and failures with views - clicks (<span class="math inline">\(\beta\)</span> parameter). Finally <span class="math inline">\(\theta\)</span> is simply clicks/views. It is also called Clickthrough Rate (CTR).</p>
+<p>Recall the greedy algorithm as it considers highest success proportion (<span class="math inline">\(\hat{\theta_k}=\alpha_k/(\alpha_k+\beta_k)\)</span>) as the next ad to show. In mathematical terms <span class="math inline">\(A_{t+1} = \mathrm{argmax}_k \{\hat{\theta_k}\}\)</span>.</p>
+<p>Thompson Sampling algorithm does exactly the same except it samples mean value from Beta distribution (<span class="math inline">\(\hat{\theta_k} \sim beta(\alpha_k,\beta_k)\)</span>). This way, Thompson Sampling provides some degree of tolerance for underperforming but infrequently tested alternatives. Recall upper bound in UCB also boosted relatively infrequently tried alternatives. The best part is as the sample grows at each iteration, the algorithm practically gives its verdict on the alternatives and it is consistent on the preferences.</p>
+</section>
+</section>
+</section>
+<section id="conclusion" class="level1">
+<h1>Conclusion</h1>
+<p>In this tutorial four different types of bandit algorithms are introduced. Let’s compare and contrast in short reviews.</p>
+<ul>
+<li><strong>(Epsilon) Greedy</strong> always tries the bandit with the best estimated reward with maximum exploitation possible. With epsilon probability or optimistic initial values exploration can be introducted.</li>
+<li><strong>Upper Confidence Bound (UCB)</strong> adds a “benefit of doubt” bonus to expected rewards of bandits respectively. This upper bound gets smaller and smaller as the experiment progresses.</li>
+<li><strong>Gradient Bandits</strong> replace reward with “preference” and selections are probabilistic instead of a function of the the best expected reward. This preference value is updated with the rewards at each iteration. Its progress is similar to stochastic gradient descent.</li>
+<li><strong>Thompson Sampling</strong> (in Beta-Binomial setting) breaks the assumption of point estimate of expected reward to be the best estimate. Instead it samples from the Beta distribution for the expected reward estimate and then applies the Greedy approach.</li>
+</ul>
+<p>There are far more algorithms than these four above. Also these algorithms have creative variations for the same or different problems. Multi Armed Bandits itself can be considered a research domain on its own. Nevertheless these algorithms can be as the introductory algorithms of the MAB topic.</p>
+<p>Next, it is possible to consider bandits that are not independent and not stable in time. Some bandits can be correlated or extra information (i.e.&nbsp;features) can be provided which affect bandits behavior (contextual bandits). Interested readers are referred to Sutton and Barto’s book.</p>
+</section>
+<section id="references" class="level1">
+<h1>References</h1>
+<p>I’m really sorry that I have not produce a properly formatted reference list, yet. Currently a description and link should do.</p>
+<ul>
+<li><a href="http://www.incompleteideas.net/book/the-book.html">Reinforcement Learning 2nd ed., Sutton and Barto</a></li>
+<li><a href="https://www.youtube.com/watch?v=TCCjZe0y4Qc&amp;list=PLqYmG7hTraZDVH599EItlEWsUOsJbAodm">Deepmind’s Reinforcement Learning Courses with UCL</a></li>
+<li><a href="https://arxiv.org/abs/1707.02038">A Tutorial on Thompson Sampling</a></li>
+<li><a href="https://academic.oup.com/biomet/article-abstract/25/3-4/285/200862?redirectedFrom=PDF">Thompson Sampling Original Paper</a></li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

@@ -1,0 +1,431 @@
+---
+title: "Statistical Models in R: Part 1"
+date: Mar 12, 2018
+output:
+  html_document:
+    toc: true
+  pdf_document:
+    toc: true
+    toc_depth: 3
+---
+
+```{r,echo=FALSE,results="hide",warning=FALSE,message=FALSE}
+options(dplyr.width=Inf)
+library(tidyverse)
+```
+
+_This is part of old lecture notes_
+
+
+# Principle Components Analysis (PCA)
+
+Let's recall the example from the lecture notes. Our survey asks about how much they care about price, software, aesthetics and brand when choosing a new computer. There are 16 respondents with differing operating systems (OS). (e.g. 0 is Windows, 1 is Mac). Data set is as follows. Likert answers from 1 to 7 is a scale from strongly disagree to strongly agree.
+
+```{r}
+#Customer Survey Data
+survey_data <- data.frame(
+customer = 1:16,
+OS = c(0,0,0,0,1,0,0,0,1,1,0,1,1,1,1,1),
+Price = c(6,7,6,5,7,6,5,6,3,1,2,5,2,3,1,2),
+Software = c(5,3,4,7,7,4,7,5,5,3,6,7,4,5,6,3),
+Aesthetics = c(3,2,4,1,5,2,2,4,6,7,6,7,5,6,5,7),
+Brand = c(4,2,5,3,5,3,1,4,7,5,7,6,6,5,5,7)
+)
+
+#Let's do some exploratory analysis
+summary(survey_data[,3:6])
+
+#Correlation Matrix
+cor(survey_data[,3:6])
+
+#Do PCA with princomp function and use correlation matrix to create components
+survey_pca <- princomp(as.matrix(survey_data[,3:6]),cor=T)
+summary(survey_pca,loadings=TRUE)
+```
+
+As you can clearly see, the first 2 PC is responsible for 85% of the variation. First PC considers Price and Software as negative effects and Aesthetics and Brand as a positive effect, second PC is highly affected by Software. With the third PC, 96.4% of the variation is explained.
+
+```{r,warnings=FALSE,messages=FALSE,tidy=FALSE}
+library(ggplot2)
+ggplot(data.frame(pc=1:4,cum_var=c(0.6075727,0.8478733,0.9640409,1.00000000)),
+    aes(x=pc,y=cum_var)) + geom_point() + geom_line()
+```
+
+You see, there is a trade-off between explanatory power and number of explanatory variables (dimensions).
+
+## Properties of PCA
+
++ PCA is a method to reduce the number of explanatory variables. The resulting principle components (PC) are actually linear transformations of your explanatory variables. (e.g. $PC_i = a_1*x_1 + a_2*x_2 + \dots + a_p*x_p$).
++ If some or most of your explanatory variables are highly correlated, then PCA is the way to go.
++ Total number of PCs are equal to total number of explanatory variables. Though, it is possible to eliminate some PCs without considerable loss in explanatory power.
++ PCs are fairly independent (i.e. low correlation).
++ You cannot use categorical or binary variables in PCA.
++ PCA is more of an exploration tool than an explanation or prediction tool. Though, it is possible to use PCs as input to other methods (i.e. regression).
++ PCA considers linear relationship, so it is not good for non-linear relations (i.e. $x_1 = x_2^2$). It also assumes normally distributed errors, so fat tailed distributions are a poor fit to PCA.
++ It is possible to use covariance matrix rather than the correlation matrix.
++ Centering and scaling can be done to get better results. Centering sets the mean values of the covariates to 0 and scaling converts explanatory variables to result in unit variance.
++ In R you can use both `prcomp` and `princomp` functions. While the former uses singular value decomposition method to calculate principle components, the latter uses eigenvalues and eigenvectors.
+
+## Examples
+
+### Made-up Example regarding Transformations
+```{r}
+set.seed(58)
+#Randomly create data points around the normal distribution
+x1=rnorm(30,mean=2,sd=4)
+#Get one linear transformation and one nonlinear transformation of the data
+pca_data<-data.frame(x1,x2=x1*2,x3=(x1^2),x4=abs(x1)^(0.5)+rnorm(30))
+#See the correlation matrix
+pca_cor<-cor(pca_data)
+pca_cor
+#See the eigenvalues and eigenvectors
+pca_eigen<-eigen(pca_cor)
+pca_eigen
+#See the standard deviations and proportion of variances
+sqrt(pca_eigen$values)
+pca_eigen$values/sum(pca_eigen$values)
+cumsum(pca_eigen$values/sum(pca_eigen$values))
+#Run PCA
+pca_result<-princomp(pca_data,cor=T)
+#See the PCA
+summary(pca_result,loadings=TRUE)
+
+pca_result2<-princomp(pca_data[,c("x1","x3","x4")],cor=T)
+summary(pca_result2,loadings=TRUE)
+```
+
+### Young People Survey
+
+Following data is from Kaggle. Data set is named [Young People Survey](https://www.kaggle.com/miroslavsabo/young-people-survey). It is a simple survey with lots of questions and some demographic data. Resulting PCA analysis helps us to maintain 90% of the variance with just two-thirds of the survey questions.
+
+```{r,tidy=FALSE}
+#Prepare data
+yr_data <-
+read.csv("data/youth_responses.csv",sep=",") %>%
+filter(complete.cases(.)) %>%
+# mutate(id=row_number()) %>%
+tbl_df()
+
+#Prepare PCA data
+yr_pca<-
+yr_data[,sapply(yr_data,class)=="integer"] %>%
+select(Music:Spending.on.healthy.eating)
+
+#Run PCA analysis
+yr_pca_result<-princomp(yr_pca,cor=T)
+
+#See the PCA output
+ggplot(data=data.frame(PC=1:length(yr_pca_result$sdev),
+    var_exp=cumsum(yr_pca_result$sdev^2/sum(yr_pca_result$sdev^2))),
+aes(x=PC,y=var_exp)) + geom_line() +
+geom_point() +
+scale_y_continuous(labels = scales::percent,breaks=seq(0,1,length.out=11)) +
+scale_x_continuous(breaks=seq(0,135,by=5))
+
+```
+
+
+## References
+
++ [http://www.rpubs.com/aaronsc32/principal-component-analysis](http://www.rpubs.com/aaronsc32/principal-component-analysis)
++ [https://onlinecourses.science.psu.edu/stat505/node/49](https://onlinecourses.science.psu.edu/stat505/node/49)
++ [http://www.stat.cmu.edu/~cshalizi/uADA/12/lectures/ch18.pdf](http://www.stat.cmu.edu/~cshalizi/uADA/12/lectures/ch18.pdf)
++ [https://www.kaggle.com/c/santander-customer-satisfaction/data](https://www.kaggle.com/c/santander-customer-satisfaction/data)
++ [https://www.kaggle.com/c/santander-customer-satisfaction/data](http://www.cerebralmastication.com/2010/09/principal-component-analysis-pca-vs-ordinary-least-squares-ols-a-visual-explination/)
++ [http://www.cs.otago.ac.nz/cosc453/student_tutorials/principal_components.pdf](http://www.cs.otago.ac.nz/cosc453/student_tutorials/principal_components.pdf)
++ [http://www.rpubs.com/koushikstat/pca](http://www.rpubs.com/koushikstat/pca)
++ [https://www.kaggle.com/miroslavsabo/young-people-survey](https://www.kaggle.com/miroslavsabo/young-people-survey)
+
+# Multidimensional Scaling (MDS)
+
+Classical multidimensional scaling is kind of a reverse engineering method. Basically, from a distance matrix it can generate approximate locations of nodes in the coordinate system.
+
+The most classical example is if a distance matrix between cities are used as an input, MDS gives the coordinates as the output. In the following example we are going to "generate" 10 cities, plot them, get distance matrix, run MDS on the distance matrix and get coordinates back.
+
+```{r}
+#Set the seed for reproducibility
+set.seed(58)
+#Create a coordinate matrix (all coordinates are between 0 and 1).
+#Suppose the places of cities A to J
+coord_mat<-matrix(round(runif(20),6),ncol=2)
+#Column names of the coordinate matrix, say x and y
+colnames(coord_mat)<-c("x","y")
+#Row names of the coordinates are cities.
+#LETTERS is a predefined vector with letters of the English alphabet.
+rownames(coord_mat)<-LETTERS[1:10]
+#Create distance matrix
+dist_mat<-dist(coord_mat)
+#Display coordinate matrix
+print(coord_mat)
+ggplot(as.data.frame(coord_mat),aes(x=x,y=y)) + geom_text(label=rownames(coord_mat))
+print(dist_mat)
+
+#Now let's employ Multidimensional Scaling (MDS)
+#Base R has a lovely command called cmdscale (Classical multidimensional scaling)
+mds_data<-cmdscale(dist_mat,k=2)
+colnames(mds_data)<-c("x","y")
+#Print the output
+print(mds_data)
+#Let's plot the output
+ggplot(as.data.frame(mds_data),aes(x=x,y=y)) +
+geom_text(label=rownames(mds_data)) + labs(title="MDS Output")
+#Not quite similar? Let's manipulate a bit.
+ggplot(as.data.frame(mds_data) %>% mutate(y=-y),aes(x=y,y=x)) +
+geom_text(label=rownames(mds_data)) +
+labs(title="MDS Output Transposed and Inverted")
+```
+
+The output is not perfect but a close representation of the original coordinates.
+
+Following example is from the Young People Survey data, again. We would like to see the how respondants music preferences correlate among different genres. We are going to use the correlation matrix as a similarity measure.
+
+```{r}
+#Get the Young People Survey data
+yr_mds_data <- yr_pca %>% select(Dance:Opera)
+print(head(as.data.frame(yr_mds_data)))
+#Correlation is a similarity measure between -1 and 1
+#Get the negative of it as a distance measure and add 1 to make sure distances start from 0
+yr_dist <- 1 - cor(yr_mds_data)
+#Apply MDS
+yr_mds <- cmdscale(yr_dist,k=2)
+#Provide column names
+colnames(yr_mds) <- c("x","y")
+print(yr_mds)
+#Plot
+ggplot(data.frame(yr_mds),aes(x=x,y=y)) + geom_text(label=rownames(yr_mds),angle=45,size=2)
+```
+
+Rock and related music are clustered on the left bottom, with Punk a bit distant. On the top classical music and opera goes together; swing-jazz, country, folk and musical genres are close. Pop, dance, techno and hip-hip/rap music are loosely together. Not bad, eh? Perhaps it is not the most accurate representation, but we can see that MDS captured considerable information in just two dimensions.
+
+## Properties
+
++ Non-parametric (except you need to specify the number of components).
++ Another dimension reduction technique.
++ MDS is frequently used in psychology, sociology, archeology, biology, medicine, chemistry, network analysis and economics.
+
+## References
+
++ [http://carme2011.agrocampus-ouest.fr/slides/Groenen.pdf](http://carme2011.agrocampus-ouest.fr/slides/Groenen.pdf)
+
+# K-Means
+
+One of the most popular clustering algoritms is, without doubt, K-Means. In the classical form, given a number of (say, $k$) clusters, the algorithm adds nodes to the clusters to minimize the variance within cluster (i.e. squared distance from the cluster center to the nodes).
+
+Let's apply K-Means to the Young People Survey MDS output.
+
+```{r,tidy=FALSE}
+#Set the seed because K-Means algorithm uses a search based method
+set.seed(58)
+#Apply K-Means
+genre_cluster<-kmeans(yr_mds,centers=4)
+##Get the clusters
+mds_clusters<-
+data.frame(genre=names(genre_cluster$cluster),
+cluster_mds=genre_cluster$cluster) %>% arrange(cluster_mds,genre)
+mds_clusters
+#Plot the output
+ggplot(
+    data.frame(yr_mds) %>% mutate(clusters=as.factor(genre_cluster$cluster),
+    genres=rownames(yr_mds)),aes(x=x,y=y)) +
+    geom_text(aes(label=genres,color=clusters),angle=45,size=2) +
+    geom_point(data=as.data.frame(genre_cluster$centers),aes(x=x,y=y)
+)
+```
+
+As long as columns are numeric, you can easily apply K-Means to the data set. Interpretation of K-Means can change with the data. Let's also use the raw data.
+
+```{r,tidy=FALSE}
+#Set the seed because K-Means algorithm uses a search based method
+set.seed(58)
+#Apply K-Means to the raw data.
+genre_cluster_raw<-kmeans(t(yr_mds_data),centers=4)
+
+#Build the comparison data
+compare_kmeans<-
+left_join(mds_clusters,
+data.frame(genre=names(genre_cluster_raw$cluster),
+cluster_raw=genre_cluster_raw$cluster),by="genre")
+
+print(compare_kmeans)
+```
+
+Now, let's get genre average scores and apply K-Means again.
+
+```{r}
+#Set the seed because K-Means algorithm uses a search based method
+set.seed(58)
+#Prepare data (get mean scores) and apply K-Means
+yr_means_data<-yr_mds_data %>% summarise_each(funs(mean)) %>% t()
+yr_means_data
+means_kmeans<-kmeans(yr_means_data,centers=4)
+#Add to compare kmeans
+compare_kmeans<-
+left_join(compare_kmeans,
+data.frame(genre=names(means_kmeans$cluster),cluster_mean=means_kmeans$cluster),by="genre")
+print(compare_kmeans)
+```
+
+The latest K-Means iteration is not the best descriptive model. So, be mindful about how you prepare your data.
+
+## Properties
+
++ K-Means is an unsupervised method. You don't need a response variable or pre-labeled data.
++ K-Means requires the number of clusters as input. Total error is a non-increasing function of number of clusters.
++ K-Means is not suitable for every application.
++ As K-Means uses sum of squared errors, it is advised to scale the components. If component X1 ranges from 0 to 1 and component X2 ranges from -1000 to 1000, the algorithm will weigh considerably on X2.
++ Differing density, non-globular shapes, differing sizes all affect K-Means performance.
+
+
+# Hierarchical Clustering
+
+Algorithms like K-Means are categorized as Partitioning Clustering, which means each node can only reside in one cluster. In Hierarchical Clustering there are clusters within larger clusters, resulting in a tree like structure. There are also two types of hierarchical clustering methods, divisive ("top-down") or agglomerative ("bottom-up"). The former starts with all the nodes in a cluster and splits the clusters on the way down and the latter starts merging nodes up to a single cluster. Examples here belong to agglomerative clusters.
+
+Let's use MDS output of Young People Survey for Hierarchical Clustering. Single link (or MIN) is known to minimize the closest dissimilarity between the nodes in pairwise clusters. Complete link (or MAX) is the opposite, it wants to minimize the largest dissimilarity. Average method aims to minimize the average distance between nodes in each cluster. Centroid only checks cluster centers. Ward method
+
+```{r}
+### Single link (MIN) method
+yr_hc<-hclust(as.dist(yr_dist),method="single")
+plot(yr_hc,hang=-1)
+### Complete link (MAX) method
+yr_hc<-hclust(as.dist(yr_dist),method="complete")
+plot(yr_hc,hang=-1)
+### Average method
+yr_hc<-hclust(as.dist(yr_dist),method="average")
+plot(yr_hc,hang=-1)
+### Centroid method
+yr_hc<-hclust(as.dist(yr_dist),method="centroid")
+plot(yr_hc,hang=-1)
+### Ward method
+yr_hc<-hclust(as.dist(yr_dist),method="ward.D2")
+plot(yr_hc,hang=-1)
+```
+
+## Properties
+
++ Hierarchical clustering not only provides insight about the proximity of nodes, but also the proximity of sub-groups.
++ Depending on the agglomeration method, cluster performance might vary significantly. MIN can handle non eliptical shapes but it is sensitive to noise and outliers. MAX handles outliers/noise better but it has a tendency to break large clusters and it is biased towards globular shapes. Average is a midway between MIN and MAX. Ward's method is also better with noisy data and biased towards globular shape. It is also known to provide good starting centroids for K-Means.
++ Once agglomeration is done, it cannot be changed.
++ We don't have a comprehensive objective function to optimize.
++ Might not be suitable if data is too noisy, sparse or asymmetrical in size.
+
+## References
+
++ [http://www3.nd.edu/~rjohns15/cse40647.sp14/www/content/lectures/13%20-%20Hierarchical%20Clustering.pdf](http://www3.nd.edu/~rjohns15/cse40647.sp14/www/content/lectures/13%20-%20Hierarchical%20Clustering.pdf)
+
+# Supervised Learning (Regression and Classification)
+
+Main distinction between supervised and unsupervised (e.g. clustering) learning is that supervised learning methods have a response variable consisting of values (regression) or labels (classification).
+
+## Linear Regression
+
+Linear regression is the most basic kind of regression. The structure is quite easy to comprehend ($Y = \beta_0 + \beta_1*X_1 + \dots + \beta_k*X_k$).
+
+Following example uses `swiss` data (included in base R). Data consists of fertility measure and socio-economic indicators of 47 French-speaking provinces of Switzerland at 1888. These indicators are agriculture (percentage of males work in agriculture), examination (percentage of highest marks in army examination), education (percentage of people who received education beyond primary school), catholic (percentage of catholic people) and infant mortality (as percentage of babies who live less than 1 year).
+
+```{r,tidy=FALSE}
+#First check the data
+head(swiss)
+#Run a simple linear regression
+ggplot(data=swiss) + geom_point(aes(x=Examination,y=Fertility)) +
+ geom_smooth(method='lm',aes(x=Examination,y=Fertility),se=FALSE)
+fert_vs_exam<-lm(Fertility ~ Examination, data=swiss)
+summary(fert_vs_exam)
+#Now Fertility vs all
+fert_vs_all<-lm(Fertility ~ ., data=swiss)
+summary(fert_vs_all)
+```
+
+Fertility can seemingly be explained by those covariates. But what about classification problems? Linear regression is not very well suited in categorical response variables.
+
+## Logistic regression
+
+Logistic regression is commonly used in binary response variables such as high/low, accept/reject, yes/no type situations. In the following example we will build a credit scoring model which will "tell" us if a demanded loan is good or bad. We are going to use the German Credit data (download from [here](https://onlinecourses.science.psu.edu/stat857/node/215)). It consists of credit applications and classified as accepted/rejected. The other 20 columns are explanatory variables such as account balance, occupation, gender and marital status, savings, purpose of the credit, payment status. For our example we will use only three covariates (account balance, occupation sex/marital status).
+
+Covariates are score variables (can also be considered as categorical). **Account.Balance** (1: no running account, 2: no balance or debit, 3: 0 <= ... < 200 DM, 4: ... >= 200 DM or checking account for at least 1 year) and **Occupation** (1: unemployed / unskilled with no permanent residence, 2: unskilled with permanent residence, 3: skilled worker / skilled employee / minor civil servant, 4: executive / self-employed / higher civil servant).
+
+```{r,warning=FALSE,tidy=FALSE}
+set.seed(58)
+##Get the data
+credit_data<-read.csv("data/german_credit.csv") %>%
+select(Creditability, Account.Balance, Occupation) %>%
+tbl_df()
+
+print(head(credit_data))
+
+##Use 50% as training set
+train_sample<-sample(1:nrow(credit_data),round(nrow(credit_data)/2),replace=FALSE)
+credit_train <- credit_data %>% slice(train_sample)
+credit_test <- credit_data %>% slice(-train_sample)
+
+#Assume covariates are scores
+credit_model<-glm(Creditability ~ Account.Balance + Occupation,
+    family=binomial(link="logit"),data=credit_train)
+#See the summary of the model
+summary(credit_model)
+
+#Check the predictions for both in sample and out of sample data
+credit_model_in_sample<-
+data.frame(actual=credit_train$Creditability,
+    fitted=predict(credit_model,type="response"))
+credit_model_in_sample %>%
+    group_by(actual) %>%
+    summarise(mean_pred=mean(fitted),sd_pred=sd(fitted))
+
+credit_model_out_of_sample<-
+data.frame(actual=credit_test$Creditability,
+    fitted=predict(credit_model,newdata=credit_test,type="response"))
+credit_model_out_of_sample %>%
+    group_by(actual) %>%
+    summarise(mean_pred=mean(fitted),sd_pred=sd(fitted))
+
+#Model as covariates are assumed as ordered factors
+credit_model_fctr<-
+    glm(Creditability ~ ordered(Account.Balance,levels=1:4) +
+    ordered(Occupation,levels=1:4),
+     family=binomial,data=credit_train)
+#See the summary of the model
+summary(credit_model_fctr)
+
+#Check the predictions for both in sample and out of sample data
+credit_model_in_sample<-
+    data.frame(actual=credit_train$Creditability,
+        fitted=predict(credit_model_fctr,type="response"))
+credit_model_in_sample %>% group_by(actual) %>%
+    summarise(mean_pred=mean(fitted),sd_pred=sd(fitted))
+
+credit_model_out_of_sample<-
+    data.frame(actual=credit_test$Creditability,
+        fitted=predict(credit_model_fctr,newdata=credit_test,type="response"))
+
+credit_model_out_of_sample %>%
+    group_by(actual) %>%
+    summarise(mean_pred=mean(fitted),sd_pred=sd(fitted))
+```
+
+## K Nearest Neighbors (KNN)
+
+The name explains everything. For each node, the algorithm checks the $k$ nearest nodes (by euclidean distance of covariates). Based on their "votes", the class of the node is estimated. If there is a tie,
+
+```{r}
+##We are going to use knn function of the class package
+## If the class package is not loaded use install.packages("class")
+##Below example is from iris data set
+## train is the covariates of the training set
+train <- rbind(iris3[1:25,,1], iris3[1:25,,2], iris3[1:25,,3])
+## cl is the class of the training set
+## First 25 nodes are (s)etosa, second 25 are versi(c)olor, third 25 are (v)irginica
+cl <- factor(c(rep("s",25), rep("c",25), rep("v",25)))
+## test is the test set we want to predict its classes
+test <- rbind(iris3[26:50,,1], iris3[26:50,,2], iris3[26:50,,3])
+##The following function uses the train set and classes to predict
+#the class of the test set's classes
+knn_cl<-class::knn(train, test, cl, k = 3, prob=TRUE)
+knn_cl
+##Let's also compare knn estimates vs actual test data classes (same order as train data)
+table(data.frame(actual=cl,estimate=knn_cl))
+```
+
+## References
+
++ These lecture notes were initially used at Bogazici University Engineering Management Master Program.
++ [https://onlinecourses.science.psu.edu/stat857/node/215](https://onlinecourses.science.psu.edu/stat857/node/215)

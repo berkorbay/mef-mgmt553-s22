@@ -1,0 +1,158 @@
+---
+title: "Multi Armed Bandits 101"
+author: "Berk Orbay"
+date: "Version 0 - Updated at `r lubridate::now()`"
+output: 
+  pdf_document:
+    toc: false
+    toc_depth: 3
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+# Preface to This Document
+
+This document can be considered as a proto-lecture notes for bandit algorithms. It is designed to be an introduction to simple k-armed bandits to teach the fundamentals. Content here can be a lecture worth of a 1 to 3 full-day workshop. 
+
+While the code is in Python, the process will be simple enough that procedures here can even be implemented with Excel formulas to a good degree.
+
+# Introduction to Bandits
+
+Reinforcement learning can be dubbed as the "iterative and interactive AI". In the most basic sense, an "agent" interacts with the "environment" with a "policy" and updates their policy with the "feedback" (i.e. reward/penalty) from the environment. Bandits are a small but extremely entertaining part of the domain. 
+
+A bandit is a simple process that returns you a "reward" when triggered (i.e. chosen). The name (one-armed bandit) originates from gambling. A slot machine is also called a one armed bandit because some old slot machines used to have an arm and they suck you dry as you keep being hooked and losing money to the machine. Though, I admit that calling a mathematical abstraction "bandit" has a certain charm to it. The name "*k-armed bandit*" means that there are $k$ machines with varying reward distributions. The objective is to learn which machine returns the largest rewards with as little cost (i.e. trials) as possible. 
+
+Bandits have real life applications. In many cases, they replace A/B testing with a more efficient methodology. For instance, sending emails to different segments, showing landing pages to different customers, ad campaign optimization as well as other similar applications can be solved with bandits.
+
+# Conceptual Deconstruction
+
+This part has no math in it. Any reinforcement learning experiment requires constructs to function. Main entities are agent and environment and the interaction between agent and environment is another construct to be considered. Other types such as policies, actions and rewards can be defined inside these categories. Perhaps "time" can be considered as a separate entity. It will all make sense in a moment.
+
+## Environment
+
+In simple k-armed bandit problems, the environment is your arms on the bandit. At each iteration, one of the arms is selected and the arm yields a "reward". Agents (decision makers) are not supposed to know the logic behind the reward process, otherwise finding the best arm is a trivial task. Though we may need to design bandits in our experiments.
+
+A very simple arm design is a uniform random variate generator with lowest value $a$ and highest value $b$. Expected reward ($E[R]$) from that arm will therefore be $E[R] = (a+b)/2$. Suppose we are dealing with two arms with parameters $(a=2,b=5)$ and $(a=2.5,b=4.7)$. So, expected rewards are $E[R_1] = 3.5$ and $E[R_2] = 3.6$. Even though Arm 1 have a higher high-end (5 vs 4.7), on average Arm 2 is a better bet (3.6 vs 3.5).
+
+Bandits more complex than a stationary distribution are out of the core scope of this lecture. They can be mentioned in discussions or some variants can be introduced as extra exercises.
+
+## Agent
+
+Agent is the decision maker. Agents makes their decisions (actions) according to a policy. This policy makes use of starting assumptions and consequences of its actions (i.e. rewards). An action in simple k-armed bandit problems is simply choosing an arm. 
+
+Agents generally keep record of expected reward estimates of arms and update those estimates as they get the result of their actions. Reward estimates are input to policy functions and policies result in decisions (i.e. next actions).
+
+Initially (i.e. $t=0$), all expected reward estimates are assumed to be zero. However this assumption may be adjusted (i.e. optimistic greedy policy).
+
+## Interaction
+
+In simple k-armed bandit problem, interaction between the agent and the environment is limited to one action per time step. Agent chooses an arm and receives its reward, that's it. No multiple choices or no extras (e.g. budgets) at the start. Time is described as discrete (i.e. time step). At each time step the agent decides on a single arm. 
+
+# Notation
+
+Every mathematical concept has their own (notation) convention and following a convention is useful for compatibility. Though it is hard to keep track of variables and indices. Here we follow the notation of Sutton and Barto's book (see Summary of Notation also) and Deepmind UCL's YouTube videos. 
+
++ $k$: Number of actions (bandits in $k$-armed bandits).
++ $a$: A specific action (bandit). It is like choosing Bandit No.8.
++ $A_{t}$: Chosen action at time step $t$.
++ $Q_{t}(a)$: Expected reward estimate of action $a$ with the available information at time step $t$. 
++ $q_{*}(a)$: Actual expected reward of action $a$. If everything goes well $Q_{t}(a)$ will converge to $q_{*}(a)$ with increasing $t$.
++ $N_{t}(a)$: Number of times the action $a$ is taken up to time step $t$.
++ $H_{t}(a)$: Learned preference for selecting action $a$ at time $t$. It is used in contextual bandits.
++ $\pi_{t}(a)$: Probability of selecting action $a$ at time $t$.
++ $\bar{R_{t}}$: Estimate of expected reward given the set of $\pi_{t}(a), \forall_{a}$.
+
+# Algorithms - Fun Part
+
+There are several "simple" heuristics to start with MAB, also it is an entry point to Reinforcement Learning. It starts simple, but actually it becomes fairly complex and mathematically rigorous very quickly. There will be some precautions to separate intuition from demanding math without compromising from both. Each algorithm starts with one liners to explain the gist of it.
+
+## Greedy and Epsilon Greedy
+
+Greedy always picks the arm with the highest estimated reward. If we add a small probability (hence $\epsilon$) to break habit and pick entirely randomly then it is $\epsilon$-Greedy.
+
+We can almost always say Greedy will stuck at local optima (i.e. nice way of saying "It could be better."). Main reason is finding the best arm severely depends on early actions and their rewards. Suppose there are two bandits. First bandit yields either of $(-1,7)$ with equal probability and the second bandit yields $(1,2)$. We know that first bandit's actual expected reward ($q_*(a=1) = -1 *0.5 + 7*0.5 = 3$) is higher than the second one ($q_*(a=2) = 1 *0.5 + 2*0.5 = 1.5$). Our reward estimates for the first step is 0 for both bandits ($Q_1(a=1) = 0, Q_1(a=2) = 0$).
+
+But, our greedy agent does not know this fact so it begins to explore. Suppose we pick our first action randomly ($A_1 = 1$) and reward becomes ($R_1 = -1$). We update our estimates for the next step to ($Q_2(a=1) = -1, Q_2(a=2) = 0$). So by Greedy logic, our next action is ($A_2 = 2$), and suppose its outcome is ($R_2 = 1$). We update our estimates to ($Q_3(a=1) = -1, Q_3(a=2) = 1$). The preference is again for the second bandit. Suppose this time reward is ($R_3 = 2$), therefore estimates are updated ($Q_4(a=1) = -1, Q_4(a=2) = (1 + 2)/2 = 1.5$). Due to an unfortunate outcome in the first step, first bandit will never be selected in this setting again with a greedy approach.
+
+### Epsilon ($\epsilon$) Approach
+
+Greedy approaches are pure "exploitation". Good thing about exploitation is, if we are on the right track we can improve quickly. Bad news is we are seldom on the right track but more frequently we are stuck in some place we think we are on the right track. $\epsilon$-Greedy is a solution to add some "exploration". When we set $\epsilon$ to a small probability (say, 0.1), we simply encourage the algorithm to try different alternatives and hopefully be more serendipitous. Exploration vs exploitation is an essential topic that should be discussed more.
+
+Suppose at the end of time step 7, ($Q_8(a=1) = -1, Q_8(a=2) = 1.62$), epsilon kicks in and $A_8 = 1$. This time $R_8 = 7$ and estimated rewards are updated to ($Q_9(a=1) = 3, Q_9(a=2) = 1.62$). 
+
+### Optimistic Initial Values
+
+We had a simple assumption of $Q_1(a) = 0, \forall_a$. What if we start with an optimistic value of 10? ($Q_1(a) = 10, \forall_a$). Then Greedy algorithm will need to explore at the first iterations. It might improve the performance of the algorithm but there are occasion which this method is ineffective.
+
+## Upper Confidence Bound (UCB)
+
+Another approach to remedy shortsightedness of Greedy method is to add a "bonus" of what the outcome might be. UCB formulates this bonus as an upper (confidence) bound given below. $c$ is a parameter to be chosen, while $\ln t$ represents natural logarithm of the current time step $t$ and $N_t(a)$ is the number of times that action $a$ is chosen. 
+
+
+$$A_t = \underset{a}{\mathrm{argmax}} \left[ Q_t(a) + c \sqrt{\dfrac{\ln t}{N_t(a)}} \right]$$
+The resulting extra ($c \sqrt{\dfrac{\ln t}{N_t(a)}}$) is added to agent's reward estimation for that action ($Q_t(a)$) to improve the chances of an action to be taken. If ($N_t(a) = 0$), then the action's estimated reward goes to infinity therefore makes the action a priority.
+
+Upper confidence bound encourages exploration but converges to exploitation as the bandit is explored more frequently. The logic behind can be similar to the thought "This bandit is expected to perform X but it might not be explored that much, so let's make it X + Y, which Y gets smaller as we visit that bandit."
+
+## Gradient Bandits
+
+Gradient bandits differ from other algorithms by implementing a preference scheme rather than using reward estimates directly. Denote preference variable with $H_t(a)$. Then, instead of selecting with the higher preference convert preference values (scores) to probabilities using the formula below.
+
+$$Pr\{A_t = a\} = \pi_t(a) = \dfrac{e^{H_t(a)}}{\sum_{b=1}^ke^{H_t(b)}}$$
+
+Then at each step, update the preference values ($H(A_t)$).
+
+$H_{t+1}(A_t) = H_{t}(A_t) + \alpha(R_t-\bar{R_t})(1-\pi_t(A_t))$ if $A_t = a$, and  
+$H_{t+1}(A_t) = H_{t}(A_t) - \alpha(R_t-\bar{R_t})\pi_t(A_t), \forall_{A_t \neq a}$ 
+
+where $\alpha$ is the time step, $\bar{R_t}$ is the average reward up to but not including time $t$, also called "the baseline".
+
+## Thompson Sampling
+
+The final fundamental algorithm for MAB comes from Thompson's work, which is actually from 1930s. While the approach was largely ignored for about 80 years it is now considered as one of the most successful algorithms for MAB work. I refer to the tutorial given in the References while adding some more elaborations. 
+
+Thompson Sampling is considered under "Bayesian Bandits" category but we are not going to get into details of prior/posterior distributions. Just keep in mind that when someone uses Bayes term, it is about extra (given) information that manipulates probabilities.
+
+### Beta-Bernoulli Bandits
+
+For the sake of simplicity we will constrain ourselves to the "Beta-Bernoulli Bandit" Example. A Bernoulli Bandit means that an event happens with probability $p$ and does not happen with probability $q = 1-p$, just like a coin toss (for the coin toss $p=q=0.5)$. So, our Bernoulli bandits give us a reward (say, "success") with a probability $p_k$ for the $k$-th bandit and nothing ("fail") with $q_k$. The average (mean value) of the reward is simply $E[A_k] = \theta_k = p_k$ and our estimate for $\theta_k$ is simply denoted as $\hat{\theta_k}$.
+
+### Beta Distribution
+
+Here is the part that gets slightly complicated. Our assumptions about $\theta_k$ is based on Beta distribution. Beta distribution is controlled by two shape parameters ($\alpha$,$\beta$). Quantile values of the Beta distribution are always between 0 and 1. 
+
+Probability density function seems a bit ominous for the uninitiated but it is fine. Gamma function converts to factorial for positive integer values ($\Gamma(x) = (x-1)!$) and we will be working on positive integer values for this example. In additon many programming languages have built-in functions to handle Beta distribution related operations.
+
+$$P(\theta_k;\alpha_k,\beta_k) =\dfrac{\Gamma(\alpha_k + \beta_k)}{\Gamma(\alpha_k)\Gamma(\beta_k)}\theta_k^{\alpha_k-1}(1-\theta_k)^{\beta_k-1}$$
+
+### How it works
+
+Let's put it in some context. Suppose we are showing an ad on a webpage. Each visitor arrives and sees the ad ("view") and there is a chance to click ("click") on that ad. We measure success with clicks ($\alpha$ parameter) and failures with views - clicks ($\beta$ parameter). Finally $\theta$ is simply clicks/views. It is also called Clickthrough Rate (CTR).
+
+Recall the greedy algorithm as it considers highest success proportion ($\hat{\theta_k}=\alpha_k/(\alpha_k+\beta_k)$) as the next ad to show. In mathematical terms $A_{t+1} = \mathrm{argmax}_k \{\hat{\theta_k}\}$.
+
+Thompson Sampling algorithm does exactly the same except it samples mean value from Beta distribution ($\hat{\theta_k} \sim  beta(\alpha_k,\beta_k)$). This way, Thompson Sampling provides some degree of tolerance for underperforming but infrequently tested alternatives. Recall upper bound in UCB also boosted relatively infrequently tried alternatives. The best part is as the sample grows at each iteration, the algorithm practically gives its verdict on the alternatives and it is consistent on the preferences.
+
+# Conclusion
+
+In this tutorial four different types of bandit algorithms are introduced. Let's compare and contrast in short reviews.
+
++ **(Epsilon) Greedy** always tries the bandit with the best estimated reward with maximum exploitation possible. With epsilon probability or optimistic initial values exploration can be introducted.
++ **Upper Confidence Bound (UCB)** adds a "benefit of doubt" bonus to expected rewards of bandits respectively. This upper bound gets smaller and smaller as the experiment progresses.
++ **Gradient Bandits** replace reward with "preference" and selections are probabilistic instead of a function of the the best expected reward. This preference value is updated with the rewards at each iteration. Its progress is similar to stochastic gradient descent.
++ **Thompson Sampling** (in Beta-Binomial setting) breaks the assumption of point estimate of expected reward to be the best estimate. Instead it samples from the Beta distribution for the expected reward estimate and then applies the Greedy approach.
+
+There are far more algorithms than these four above. Also these algorithms have creative variations for the same or different problems. Multi Armed Bandits itself can be considered a research domain on its own. Nevertheless these algorithms can be as the introductory algorithms of the MAB topic.
+
+Next, it is possible to consider bandits that are not independent and not stable in time. Some bandits can be correlated or extra information (i.e. features) can be provided which affect bandits behavior (contextual bandits). Interested readers are referred to Sutton and Barto's book.
+
+# References
+
+I'm really sorry that I have not produce a properly formatted reference list, yet. Currently a description and link should do.
+
++ [Reinforcement Learning 2nd ed., Sutton and Barto](http://www.incompleteideas.net/book/the-book.html)
++ [Deepmind's Reinforcement Learning Courses with UCL](https://www.youtube.com/watch?v=TCCjZe0y4Qc&list=PLqYmG7hTraZDVH599EItlEWsUOsJbAodm)
++ [A Tutorial on Thompson Sampling](https://arxiv.org/abs/1707.02038)
++ [Thompson Sampling Original Paper](https://academic.oup.com/biomet/article-abstract/25/3-4/285/200862?redirectedFrom=PDF)

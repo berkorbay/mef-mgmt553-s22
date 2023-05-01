@@ -8,10 +8,19 @@ toc: false
 # Ders 4 (3 Mayıs 2023)
 
 + Misafir hoca: [Onur Karadeli](https://www.linkedin.com/in/onur-karadeli-phd-c-a46a59112/) İleri Analitik, RPA ve Büyük Veri Müdürü, Socar Türkiye
-+ Konu: Makine Öğrenmesi, Yapay Zeka ve Optimizasyon
-    + [Kaynak](https://or-primer.github.io/)
-    + [Ek Kaynak](https://www.youtube.com/watch?v=w9BlUqa2JpI)
-    + [Türkçe Kaynak](https://www.youtube.com/watch?v=D7_DHhpIF4M) | [Türkçe Kaynak 2](https://www.youtube.com/watch?v=B2FZR_4bElE)
++ Konu: Makine Öğrenmesi, Yapay Zeka ve Optimizasyon Giriş
+    + Optimizasyon Giriş
+        + [Kaynak](https://or-primer.github.io/)
+        + [Ek Kaynak](https://www.youtube.com/watch?v=w9BlUqa2JpI)
+        + [Türkçe Kaynak](https://www.youtube.com/watch?v=D7_DHhpIF4M) | [Türkçe Kaynak 2](https://www.youtube.com/watch?v=B2FZR_4bElE)
+    + Makine Öğrenmesi ve Yapay Zeka Giriş
+        + [Multi Armed Bandits](./bandits_notes.html)
+            + [Türkçe Kaynak](https://yz-ai.github.io/blog/pekistirmeli-ogrenme/cok-kollu-haydutlar-bolum-2)
+        + [Makine Öğrenmesi Giriş - 1](./intro_ml_1.html) | [Makine Öğrenmesi Giriş - 2](./intro_ml_2.html)
+            + [Türkçe Kaynak - Çoklu Doğrusal Regresyon](https://www.youtube.com/watch?v=xgbSdcZ4X-g)
+            + [Türkçe Kaynak - Makine Öğrenmesi](https://www.youtube.com/watch?v=HBvMz7GTfv0)
+            + [Türkçe Kaynak - Karar Ağaçları](https://www.youtube.com/watch?v=vCysce2PKzc)
+        + [Ek Kaynak](https://www.statlearning.com/)
 
 # Ders 3 (26 Nisan 2023)
 
