@@ -5,6 +5,14 @@ toc: false
 
 + [Projeler](./proje.html)
 
+# Ders 4 (3 Mayıs 2023)
+
++ Misafir hoca: [Onur Karadeli](https://www.linkedin.com/in/onur-karadeli-phd-c-a46a59112/) İleri Analitik, RPA ve Büyük Veri Müdürü, Socar Türkiye
++ Konu: Makine Öğrenmesi, Yapay Zeka ve Optimizasyon
+    + [Kaynak](https://or-primer.github.io/)
+    + [Ek Kaynak](https://www.youtube.com/watch?v=w9BlUqa2JpI)
+    + [Türkçe Kaynak](https://www.youtube.com/watch?v=D7_DHhpIF4M) | [Türkçe Kaynak 2](https://www.youtube.com/watch?v=B2FZR_4bElE)
+
 # Ders 3 (26 Nisan 2023)
 
 + Konu: Dinamik Raporlama ([Quarto](https://quarto.org/docs/guide/) / [RMarkdown](https://rmarkdown.rstudio.com/))
