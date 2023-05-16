@@ -11,7 +11,7 @@ toc: false
 
 # Ders 6 (17 Mayıs 2023)
 
-+ Misafir hoca: [Gizem Gür](https://www.linkedin.com/in/sezererdem/) Kalkınma Yatırım Bankası Sektörel Araştırma Kıdemli Başkan Yardımcısı
++ Misafir hoca: [Barış Balta](https://www.linkedin.com/in/barisbalta/) Sufle Teknoloji Kurucu Ortağı, AWS Ambassador
 + Bulut Bilişim
     + [Türkçe Kaynak](https://www.youtube.com/watch?v=zn5W1Hk-FFI)
 
